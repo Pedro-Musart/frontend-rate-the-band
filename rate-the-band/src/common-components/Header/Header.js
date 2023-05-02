@@ -3,14 +3,14 @@ import { Colors, Spaces } from "../../shared/DesignTokens";
 import rateTheBandLogo from '../../assets/images/rate-the-band-logo.svg'
 const Wrapper = styled.header`
  width: 100%;
- height: 60px;
+ height: 95px;
  background-color: ${Colors.NEUTRAL_BLACK};
  padding: ${Spaces.TWO};
  display: flex;
  justify-content: center;
  align-items: center;
  @media (min-width: 1024px) {
-    height: 90px;
+    height: 110px;
  }`;
 
  const Logo = styled.img.attrs({

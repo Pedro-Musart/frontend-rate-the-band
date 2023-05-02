@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Colors } from '../../shared/DesignTokens';
+import { Colors, BorderRadiuses } from '../../shared/DesignTokens';
 export const Card = styled.div`
 	width: 100%;
 	height: 100%;

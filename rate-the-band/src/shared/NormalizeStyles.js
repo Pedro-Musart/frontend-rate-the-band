@@ -4,15 +4,16 @@ export const NormalizeStyles = createGlobalStyle`
     /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
     /* Document
         ========================================================================== */
-    * {
+     {
         box-sizing: border-box;
-    }
+    } 
     
     /**
      * 1. Correct the line height in all browsers.
      * 2. Prevent adjustments of font size after orientation changes in iOS.
      * 3. Define the REM base
      */
+    
     html {
         line-height: 1.15; /* 1 */
         -webkit-text-size-adjust: 100%; /* 2 */
