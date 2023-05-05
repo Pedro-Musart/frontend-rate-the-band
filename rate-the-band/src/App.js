@@ -5,6 +5,10 @@ import { NormalizeStyles } from './shared/NormalizeStyles';
 import { createBrowserRouter, RouterProvider}  from 'react-router-dom';
 import { Header } from './common-components/Header/Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
+import {configure} from 'axios-hooks';
+
+// configure({ baseURL: process.env.REACT_APP_LAST_FM_API_BASE_URL });
 
 const router = createBrowserRouter ([
   {
@@ -13,7 +17,7 @@ const router = createBrowserRouter ([
   },
 
   {
-    path: '/',
+    path: '/search',
     element: <Search></Search>,
   },
 

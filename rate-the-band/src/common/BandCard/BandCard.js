@@ -47,7 +47,7 @@ export function BandCard({ genre, name, country, image, id }) {
 				<BandAvatar src={image} />
 			</InformationGrid>
 			<Box width="87px">
-				<ButtonLink>Ver Mais</ButtonLink>
+				<ButtonLink to={`/detalhes/${id}`}>Ver Mais</ButtonLink>
 			</Box>
 		</Card>
 	);
