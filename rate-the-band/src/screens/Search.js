@@ -7,6 +7,7 @@ import { BandCard } from '../common/BandCard/BandCard';
 import styled from 'styled-components';
 import { useAxios, configure } from 'axios-hooks';
 import axios from 'axios';
+import $ from 'jquery';
 
 const BandGrid = styled(Box)`
 	display: grid;
@@ -26,29 +27,47 @@ export function Search() {
 					{process.env.REACT_APP_LAST_FM_API_KEY}
 					<p>aa</p>
 				</div>
-async function searchBand(band) {
-  const { data } = await axios.get('http://ws.audioscrobbler.com/2.0/', {
-    params: {
-      method: 'artist.search',
-      artist: band,
-      api_key: process.env.REACT_APP_LAST_FM_API_KEY,
-      format: 'json',
-    },
-    headers: {
-      'User-Agent': 'rate-the-band/1.0.0',
-    },
-  });
 
-  return data.results || [];
+function searchBand(band) {
+  const url = `http://api.deezer.com/search?q=artist:"${band}"&output=jsonp`;
+
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      type: 'GET',
+      url,
+      dataType: 'jsonp',
+      contentType: 'application/json; charset=utf-8',
+      jsonpCallback: 'jsonCallback',
+      cache: false,
+      beforeSend: (xhr) => {
+        // função antes de executar a chamada
+      },
+      success: (data) => {
+        resolve(data);
+      },
+      error: (xhr, status, error) => {
+        reject(error);
+      }
+    });
+  });
 }
 
+
+
 	const [bands, setBands] = React.useState([]);
-	
+	const [isLoading, setIsLoading] = React.useState(false);
+
 	React.useEffect(() => {
 		searchBand('Pink Floyd').then((bands) => {
-			console.log(bands);
+			setBands(bands.data);
+			console.log(bands)
+			setIsLoading(true);
 		});
 	}, []);
+
+
+
+
 
 
 
@@ -72,18 +91,22 @@ async function searchBand(band) {
 		</Flex>
 		
 		<BandGrid my={Spaces.FIVE}>
+		
 
-		{bands.map((band) => (
-			<BandCard
-				key={band.id}
-				id={band.id}
-				genre={band.genre}
-				name={band.name}
-				image={band.image}
-				country={band.country}
+		{isLoading && bands.map((band)=> (
+		 <BandCard
+				key={band.artist.name}
+				id={band.artist.name}
+				genre={band.artist.name}
+				name={band.artist.name}
+				image={band['artist']['picture_medium']}
+				country={band.artist.name}
 			/>
-
+	
 		))}
+		
+
+	
 
 		</BandGrid>
 

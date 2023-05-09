@@ -26,7 +26,7 @@ const BandAvatar = styled.div`
 	background-size: cover;
 	background-position: center;
 `;
-export function BandCard({ genre, name, country, image, id }) {
+export function BandCard({ genre, name, country, image, id, key}) {
 	return (
 		<Card>
 			<InformationGrid p={Spaces.TWO} mb={Spaces.ONE_HALF}>
