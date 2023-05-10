@@ -7,7 +7,7 @@ import { BandCard } from '../common/BandCard/BandCard';
 import styled from 'styled-components';
 import { useAxios, configure } from 'axios-hooks';
 import axios from 'axios';
-import $ from 'jquery';
+import $, { map } from 'jquery';
 
 const BandGrid = styled(Box)`
 	display: grid;
@@ -29,7 +29,7 @@ export function Search() {
 				</div>
 
 function searchBand(band) {
-  const url = `http://api.deezer.com/search?q=artist:"${band}"&output=jsonp`;
+  const url = `http://api.deezer.com/search?q="${band}"&output=jsonp`;
 
   return new Promise((resolve, reject) => {
     $.ajax({
@@ -58,14 +58,54 @@ function searchBand(band) {
 	const [isLoading, setIsLoading] = React.useState(false);
 
 	React.useEffect(() => {
-		searchBand('Pink Floyd').then((bands) => {
-			setBands(bands.data);
-			console.log(bands)
+		searchBand('c').then((bands) => {
+			
+			newBand(bands.data);
+			
+			setBands(newBand(bands.data))
+			
+
+
 			setIsLoading(true);
 		});
 	}, []);
+	
+	console.log(bands);
 
+	//a API do deezer retorna varios albuns com diversos artistas repetidos, essa função retorna um map organizado com as informações de cada artista/banda e todos os albuns relacionados a ele
+	function newBand(bandas) {
 
+		let bandaUnica = new Map();
+		const bandArray = bandas.filter((valorAtual) =>{
+			
+			//esse trecho cria um array apenas com os albuns correspondentes ao id do artista do valorAtual
+			let bandAlbums = []
+			const albunsFilter = bandas.filter ((albumAtual) =>{
+				if (albumAtual.artist.id === valorAtual.artist.id) {
+					bandAlbums.push(albumAtual.album)
+			}});
+
+			let bandMusics = []
+			const musicsFilter = bandas.filter ((musicaAtual) =>{
+				if (musicaAtual.artist.id === valorAtual.artist.id) {
+					bandMusics.push(musicaAtual.title)
+			}});
+
+			// esse trecho confere se o valor já foi inserido antes na 'bandaUnica' e se não tiver, ele retorna o map da banda com os albuns de cada artista
+			if (!bandaUnica.has(valorAtual.artist.id)) {
+				      const bandObject = {
+						artist: valorAtual.artist,
+						albuns: bandAlbums,
+						musics: bandMusics
+      }
+				bandaUnica.set(valorAtual.artist.id, bandObject)
+			}
+		})
+
+		
+		return ([...bandaUnica.values()])
+
+	}
 
 
 
@@ -95,12 +135,10 @@ function searchBand(band) {
 
 		{isLoading && bands.map((band)=> (
 		 <BandCard
-				key={band.artist.name}
-				id={band.artist.name}
-				genre={band.artist.name}
+				key={band.artist.id}
 				name={band.artist.name}
 				image={band['artist']['picture_medium']}
-				country={band.artist.name}
+				musics={band.musics[0]}
 			/>
 	
 		))}

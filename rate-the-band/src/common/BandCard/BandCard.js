@@ -26,23 +26,21 @@ const BandAvatar = styled.div`
 	background-size: cover;
 	background-position: center;
 `;
-export function BandCard({ genre, name, country, image, id, key}) {
+export function BandCard({ name, musics, image, id }) {
 	return (
 		<Card>
 			<InformationGrid p={Spaces.TWO} mb={Spaces.ONE_HALF}>
 				<Box>
-					<Caption as="div" color={Colors.GRAY_600}>
-						{genre}
-					</Caption>
 					<Box mb={Spaces.ONE}>
 						<HeadingTwo>{name}</HeadingTwo>
 					</Box>
 					<Description as="div" color={Colors.GRAY_700}>
-						<strong>Pais:</strong> {country}
-					</Description>
-					<Description as="div" color={Colors.GRAY_700}>
 						<strong>Nota atual:</strong> 5
 					</Description>
+					<Description as="div" color={Colors.GRAY_700}>
+						 {musics}
+					</Description>
+	
 				</Box>
 				<BandAvatar src={image} />
 			</InformationGrid>
