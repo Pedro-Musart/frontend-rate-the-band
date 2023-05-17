@@ -1,13 +1,16 @@
 import React from 'react';
+import { Alert } from '../common-components/Alert/Alert';
 import { Flex, Box } from 'reflexbox';
 import { Button } from '../common-components/Button/Button';
 import { SearchField } from '../common-components/SearchField/SearchField';
 import { Spaces } from '../shared/DesignTokens';
 import { BandCard } from '../common/BandCard/BandCard';
+import { BandCardLoader } from '../common/BandCard/BandCardLoader'
 import styled from 'styled-components';
 import { useAxios, configure } from 'axios-hooks';
 import axios from 'axios';
 import $, { map } from 'jquery';
+import { HeadingTwo } from '../common-components/Tipografia/HeadingTwo';
 
 const BandGrid = styled(Box)`
 	display: grid;
@@ -22,15 +25,9 @@ const BandGrid = styled(Box)`
 
 export function Search() {
 
-				<div>
-					{process.env.REACT_APP_LAST_FM_API_BASE_URL} /{' '}
-					{process.env.REACT_APP_LAST_FM_API_KEY}
-					<p>aa</p>
-				</div>
-
 function searchBand(band) {
-  const url = `http://api.deezer.com/search?q="${band}"&output=jsonp`;
-
+  const url = `http://api.deezer.com/search?q=artist:"${band}"&output=jsonp`;
+	setIsLoading(true);
   return new Promise((resolve, reject) => {
     $.ajax({
       type: 'GET',
@@ -55,22 +52,46 @@ function searchBand(band) {
 
 
 	const [bands, setBands] = React.useState([]);
-	const [isLoading, setIsLoading] = React.useState(false);
+	const [search, setSearch] = React.useState({
+		value: null,
+		doSearch: false,
+	});
+	const [isLoading, setIsLoading] = React.useState(true);
+
+	function handleUpdateSearchValue({target: {value} }){
+		setSearch((prevValue) => ({... prevValue, value}))
+	}
+
+	function handleSearch() {
+		setSearch((prevValue) => ({ ...prevValue, doSearch: true }));
+	}
 
 	React.useEffect(() => {
-		searchBand('c').then((bands) => {
+		if (search.doSearch) {
+			searchBand(search.value).then((bands) => {
+				// if (bands.data = []) {
+
+				// }
+			setBands(newBand(bands.data));
+			console.log(newBand(bands.data))
+			setSearch((prevValue) => ({ ...prevValue, doSearch: false}));
 			
-			newBand(bands.data);
-			
+			setIsLoading(false)
+		});
+	}
+	},[search]);
+
+	React.useEffect(() => {
+		searchBand('rock').then((bands) => {
+
 			setBands(newBand(bands.data))
-			
-
-
-			setIsLoading(true);
+			console.log(newBand(bands.data))
+			setIsLoading(false);
 		});
 	}, []);
+
+
 	
-	console.log(bands);
 
 	//a API do deezer retorna varios albuns com diversos artistas repetidos, essa função retorna um map organizado com as informações de cada artista/banda e todos os albuns relacionados a ele
 	function newBand(bandas) {
@@ -123,19 +144,47 @@ function searchBand(band) {
 			 
 		>
 			<Box flexGrow="1">
-				<SearchField placeholder="Digite um nome de banda"/>
+				<SearchField 
+				placeholder="Digite um nome de banda"
+				onKeyUp={handleUpdateSearchValue}
+				/>
 			</Box>
 			<Box  ml={Spaces.TWO}>
-				<Button>Buscar</Button>
+				<Button onClick={handleSearch}>Buscar</Button>
 			</Box>
 		</Flex>
 		
 		<BandGrid my={Spaces.FIVE}>
 		
 
-		{isLoading && bands.map((band)=> (
+				{isLoading && (
+				<>
+					<BandCardLoader/>
+					<BandCardLoader/>
+					<BandCardLoader/>
+					<BandCardLoader/>
+					<BandCardLoader/>
+					<BandCardLoader/>
+					<BandCardLoader/>
+					<BandCardLoader/>
+					<BandCardLoader/>
+					<BandCardLoader/>
+					<BandCardLoader/>
+					<BandCardLoader/>
+					<BandCardLoader/>
+					<BandCardLoader/>
+					<BandCardLoader/>
+					<BandCardLoader/>
+					<BandCardLoader/>
+					<BandCardLoader/>
+					<BandCardLoader/>
+
+				</>
+		)}
+
+		{!isLoading && bands.map((band)=> (
 		 <BandCard
-				key={band.artist.id}
+				id={band.artist.id}
 				name={band.artist.name}
 				image={band['artist']['picture_medium']}
 				musics={band.musics[0]}
@@ -148,8 +197,10 @@ function searchBand(band) {
 
 		</BandGrid>
 
+
+
 		</main>
 		</>
 	);
-}
 
+}
