@@ -1,17 +1,15 @@
 export const Colors = {
 	NEUTRAL_WHITE: '#FFFFFF',
-	NEUTRAL_BLACK: '#000000',
-	BLUE_500: '#2196F3',
-	BLUE_550: '#217cc3',
+	NEUTRAL_BLACK: '#2b2b2b',
+	NEUTRAL_BLACK1: '#3B3B3B',
+	NEUTRAL_BLACK2: '#858584',
+	NEUTRAL_PURPLE: '#a259ff',
+	NEUTRAL_PURPLE1: '#7943be',
 	RED_800: '#CC0400',
-	GRAY_200: '#E8E8E8',
-	GRAY_400: '#B7B7B7',
-	GRAY_600: '#6C6C6C',
-	GRAY_700: '#7B7B7B',
-	GREEN_800: '#00A152',
 };
 export const FontFamilies = {
-	PRIMARY: '"Roboto", "Helvetica", "Arial", sans-serif',
+	PRIMARY: '"Work Sans", sans-serif',
+	SECONDARY: '"Space Mono", monospace',
 };
 export const FontLetterSpacings = {
 	SMALL: '0.5px',
@@ -23,17 +21,18 @@ export const FontLineHeights = {
 	MEDIUM: '150%',
 };
 export const FontSizes = {
-	ONE: '8px',
-	ONE_HALF: '12px',
-	ONE_QUARTER: '14px',
-	TWO: '16px',
-	THREE: '24px',
-	FOUR: '32px',
+	H1: '67px',
+	H2: '51px',
+	H3: '38px',
+	H4: '28px',
+	H5: '22px',
+	BASE: '16px',
+	CAPTION: '12px'
 };
 export const FontWeights = {
 	THIN: 300,
 	REGULAR: 400,
-	BOLD: 500,
+	BOLD: 600,
 };
 export const Spaces = {
 	NONE: '0',
@@ -51,9 +50,10 @@ export const Spaces = {
 	TEN: '80px',
 };
 export const BorderRadiuses = {
-	ONE: '4px',
+	ONE: '20px',
 };
 export const Shadows = {
 	ONE: '0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24)',
 	TWO: '0px 1px 5px rgba(0, 0, 0, 0.2), 0px 3px 4px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.14)',
 };
+
