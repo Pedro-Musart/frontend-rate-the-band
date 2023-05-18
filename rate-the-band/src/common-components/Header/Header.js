@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { Colors, Spaces } from "../../shared/DesignTokens";
 import rateTheBandLogo from '../../assets/images/rate-the-band-logo.svg'
 import githubIcon from '../../assets/icons/github.svg'
@@ -7,7 +7,9 @@ import { Button } from "../../common-components/Button/Button";
 import { Link } from "../../common-components/Link/Link";
 import React from 'react';
 import { useState, useEffect } from "react";
-import { CSSTransition } from 'react-transition-group';
+import { SearchField } from '../SearchField/SearchField';
+
+
 
 const Navbar = styled.header`
  width: 100%;
@@ -19,6 +21,11 @@ const Navbar = styled.header`
    flex-direction: column;
 
 	`;
+
+const Background = styled.div`
+ background-color: ${Colors.NEUTRAL_BLACK};
+
+`
 
  const Logo = styled.img.attrs({
     src: rateTheBandLogo,
@@ -138,10 +145,15 @@ const Navbar = styled.header`
 
     return (
       <>
-     {navBarStates(isMobile, menuClick)}
+      <Background>
 
-      </>
+      </Background>
+     {navBarStates(isMobile, menuClick)}
+      
+
          
-       
+      </>
     )
  }
+
+
