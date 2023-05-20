@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Colors, Spaces } from "../../shared/DesignTokens";
 import rateTheBandLogo from '../../assets/images/rate-the-band-logo.svg'
 import githubIcon from '../../assets/icons/github.svg'
@@ -8,19 +8,34 @@ import { Link } from "../../common-components/Link/Link";
 import React from 'react';
 import { useState, useEffect } from "react";
 import { SearchField } from '../SearchField/SearchField';
+import { HeadingOne } from '../Tipografia/HeadingOne';
+import { useWindowDimensions } from '../../hooks/useWindowDimensions';
+import { InfoApresentation } from '../InfoApresentation/InfoApresentation';
 
+const fadeInAnimation = keyframes`
+  from {
+    opacity: 0;
 
+  }
+  to {
+    opacity: 1;
+  }
+`;
 
 const Navbar = styled.header`
  width: 100%;
  background-color: ${Colors.NEUTRAL_BLACK};
  padding: ${Spaces.THREE} ${Spaces.SIX};
  align-items: center;
- transition: 300ms all ease;
-@media (max-width: 950px) {
-   flex-direction: column;
-
+animation: ${fadeInAnimation} 300ms;
+@media (max-width: 990px) {
+   flex-direction: column;    
 	`;
+
+const Responsive = styled.div`
+animation: ${fadeInAnimation} 1000ms;
+width: 100%;
+`
 
 const Background = styled.div`
  background-color: ${Colors.NEUTRAL_BLACK};
@@ -50,48 +65,23 @@ const Background = styled.div`
 
  `;
 
- const Responsive = styled.div`
- @media (max-width: 900px) {
-   flex-direction: column;
-	
-   transition-duration: 2s;
- `;
+
 
 
  
  export function Header (){
 
-   function getWindowDimensions() {
-      const { innerWidth: width, innerHeight: height} = window;
-      return {width, height}
-   }
-
-   const [windowDimensions, setWindowDimensions] = useState(
-      getWindowDimensions()
-   )
-
-   const [menuClick, setMenuClick] = React.useState(false);
-   const [isMobile, setIsMobile] = React.useState(false);
-
-   useEffect(() => {
-      function handleResize(){
-      setWindowDimensions(getWindowDimensions());
-   }
-   
-   window.addEventListener("resize", handleResize);
-   return () => window.removeEventListener("resize", handleResize);
-    }, []);
-
-    useEffect(() => {
-      setIsMobile(windowDimensions.width < 1000 ? true: (setIsMobile(false), setMenuClick(false)));
-    }, [windowDimensions]);
   
+   const { isTab, isMobile } = useWindowDimensions();
+   const [menuClick, setMenuClick] = React.useState(false);
+
 
    function navBarStates(isMobile, menuClick){
 
+   
    let Estado = ""; 
    //estado 0
-   if (!isMobile) {
+   if (!isTab) {
       Estado = 
       
       <Navbar  className="d-flex justify-content-between">
@@ -108,7 +98,7 @@ const Background = styled.div`
    }
 
    //estado 1
-   if (isMobile) {
+   if (isTab) {
    Estado = 
       <Navbar className="d-flex justify-content-between">
       <div className="d-flex w-100 justify-content-between">
@@ -125,16 +115,21 @@ const Background = styled.div`
          </button>
          )}
          </div>
+         
          {menuClick && (
-                    <div className="w-100 " >
+            
+                     <Responsive>
              <Link className="me-4">Home</Link>
             <Link className="me-4">Procurar</Link>
             <Button>
                <GithubIcon/> 
                Github
             </Button>
-         </div>
+            
+      
+         </Responsive>
          )}
+         
 
    </Navbar>
    }
@@ -145,12 +140,10 @@ const Background = styled.div`
 
     return (
       <>
-      <Background>
 
-      </Background>
-     {navBarStates(isMobile, menuClick)}
-      
-
+     {navBarStates(isTab, menuClick)}
+      <SearchField></SearchField>
+      <InfoApresentation></InfoApresentation>
          
       </>
     )
