@@ -6,11 +6,7 @@ import navIcon from '../../assets/icons/navIcon.svg'
 import { Button } from "../../common-components/Button/Button";
 import { Link } from "../../common-components/Link/Link";
 import React from 'react';
-import { useState, useEffect } from "react";
-import { SearchField } from '../SearchField/SearchField';
-import { HeadingOne } from '../Tipografia/HeadingOne';
 import { useWindowDimensions } from '../../hooks/useWindowDimensions';
-import { InfoApresentation } from '../InfoApresentation/InfoApresentation';
 
 const fadeInAnimation = keyframes`
   from {
@@ -142,8 +138,7 @@ const Background = styled.div`
       <>
 
      {navBarStates(isTab, menuClick)}
-      <SearchField></SearchField>
-      <InfoApresentation></InfoApresentation>
+      
          
       </>
     )

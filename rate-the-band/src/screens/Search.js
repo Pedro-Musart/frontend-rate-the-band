@@ -1,27 +1,57 @@
 import React from 'react';
-import { Alert } from '../common-components/Alert/Alert';
 import { Flex, Box } from 'reflexbox';
-import { Button } from '../common-components/Button/Button';
 import { SearchField } from '../common-components/SearchField/SearchField';
 import { Spaces } from '../shared/DesignTokens';
 import { BandCard } from '../common/BandCard/BandCard';
-import { BandCardLoader } from '../common/BandCard/BandCardLoader'
+import { BandCardLoader } from '../common/BandCard/BandCardLoader';
 import styled from 'styled-components';
-import { useAxios, configure } from 'axios-hooks';
-import axios from 'axios';
 import $, { map } from 'jquery';
-import { HeadingTwo } from '../common-components/Tipografia/HeadingTwo';
+import {HeadingThree} from '../common-components/Tipografia/HeadingThree';
+import {InfoApresentation} from '../common/InfoApresentation/InfoApresentation';
 
 const BandGrid = styled(Box)`
+
+	
 	display: grid;
-	grid-template-columns: 1fr;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+		gap: ${Spaces.ONE_HALF};
+	@media (max-width: 1200px) {
+		grid-template-columns: 1fr 1fr 1fr 1fr ;
+		
+		
+	}
+
 	gap: ${Spaces.ONE_HALF};
-	@media (min-width: 1024px) {
-		grid-template-columns: 1fr 1fr 1fr 1fr;
+	@media (max-width: 1024px) {
+		grid-template-columns: 1fr 1fr 1fr ;
+		
+		
+	}
+
+	gap: ${Spaces.ONE_HALF};
+	@media (max-width: 550px) {
+		grid-template-columns: 1fr 1fr;
+		gap: ${Spaces.TWO};
+		
+	}
+
+		gap: ${Spaces.ONE_HALF};
+	@media (max-width: 400px) {
+		grid-template-columns: 1fr;
 		gap: ${Spaces.TWO};
 		
 	}
 `;
+
+const MarginBottom = styled.div`
+	margin-bottom: 120px;
+`
+
+const MarginY = styled.div`
+	margin: 60px 0px 60px 0px;
+`
+
 
 export function Search() {
 
@@ -131,30 +161,26 @@ function searchBand(band) {
 
 
 
-
 	return (
+		
 		<>
 		<main className="container-xl">
 
-		<Flex 
-			width={['100%', '600px']}
-			mx={[Spaces.NONE, 'auto']}
-			mt={[Spaces.THREE, Spaces.FIVE]}
-			px={[Spaces.One, Spaces.NONE]}
-			 
-		>
-			<Box flexGrow="1">
-				<SearchField 
-				placeholder="Digite um nome de banda"
+		<MarginBottom>
+		<InfoApresentation ></InfoApresentation>
+		</MarginBottom>
+			
+
+				<HeadingThree className='mb-4'>Campo de Busca</HeadingThree>
+				<SearchField
+				placeholder="Digite uma banda"
 				onKeyUp={handleUpdateSearchValue}
+				onClick={handleSearch}
 				/>
-			</Box>
-			<Box  ml={Spaces.TWO}>
-				<Button onClick={handleSearch}>Buscar</Button>
-			</Box>
-		</Flex>
 		
-		<BandGrid my={Spaces.FIVE}>
+
+		<MarginY>
+		<BandGrid >
 		
 
 				{isLoading && (
@@ -186,8 +212,10 @@ function searchBand(band) {
 		 <BandCard
 				id={band.artist.id}
 				name={band.artist.name}
-				image={band['artist']['picture_medium']}
-				musics={band.musics[0]}
+				bandImage={band['artist']['picture_medium']}
+				albumImage1= {band.albuns[0]?.cover_medium}
+				albumImage2= {band.albuns[1]?.cover_medium}
+				verMais= {band.musics.length}
 			/>
 	
 		))}
@@ -196,7 +224,7 @@ function searchBand(band) {
 	
 
 		</BandGrid>
-
+		</MarginY>
 
 
 		</main>

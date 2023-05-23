@@ -36,9 +36,9 @@ const Input = styled.input`
 	font-family: ${FontFamilies.PRIMARY};
 	border: none;
 	outline: none;
-	padding: ${Spaces.TWO};
+	padding-start: ${Spaces.TWO};
 	border-radius: ${BorderRadiuses.ONE};
-	letter-spacing: ${FontLetterSpacings.MEDIUM};
+	
 	background: none;
 	&::placeholder {
 		color: ${Colors.NEUTRAL_BLACK};
@@ -54,7 +54,7 @@ export function SearchField(props) {
 			<Input {...props} type="text" ></Input>
 			</div>
 			<div >
-			<Button >
+			<Button  {...props} >
                <Icon className="me-4"/> 
                Buscar
             </Button>

@@ -10,44 +10,102 @@ import {
 	Colors,
 	Shadows,
 	Spaces,
+	FontSizes,
+	FontFamilies,
+	FontWeights,
 } from '../../shared/DesignTokens';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css'
-const InformationGrid = styled(Box)`
-	display: grid;
-	grid-template-columns: 1fr 70px;
-	gap: ${Spaces.TWO};
+
+
+const Section = styled.section`
+display: flex;
+flex-direction: column;
+width: 207px;
+	@media (max-width: 700px) {
+	width: 158px;
+
+`
+
+const BandImage = styled.div`
+	width: 207px;
+	height: 207px;
+	display:flex;
+	border: 1px solid #3b3b3b ;
+	align-items: end;
+	justify-content: left;
+	border-radius: ${BorderRadiuses.ONE};
+	background-image: url('${(props) => props.src}');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+
+	@media (max-width: 700px) {
+	width: 158px;
+	height: 158px;
 `;
-const BandAvatarSkeleton = styled(Skeleton)`
-    width: 100%;
-    height: 70px;
-    border-radius: ${BorderRadiuses.ONE};
-`;
+
+const BandInfo= styled.div`
+ display: flex;
+ flex-direction: column;
+ justify-content: between;
+ align-items: left;
+ width: 100%;
+ padding: 15px;
+ background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.27) 33.33%, rgba(0, 0, 0, 0.55) 62.5%, #000000 95.83%);
+ border-radius: 0px 0px 20px 20px;
+`
 
 
+const AlbumContainer = styled.div`
+	display: flex;
+	width: 100%;
+	height: 63px;
+	margin-top: 10px;
+`
 
-export function BandCardLoader() {
-	return (
-		<Card>
-			<InformationGrid p={Spaces.TWO} mb={Spaces.ONE_HALF}>
-				<Box>
-					<Box mb={Spaces.ONE}>
-                        <Skeleton/>
-					</Box>
-					<Description as="div" color={Colors.GRAY_700}>
-						<Skeleton/>
-					</Description>
-					<Description as="div" color={Colors.GRAY_700}>
-						 <Skeleton/>
-					</Description>
+const AlbunsImages = styled.div`
+	flex: 1 ;
 	
-				</Box>
-                <BandAvatarSkeleton/>
-				
-			</InformationGrid>
-			<Box width="87px" py={Spaces.ONE} px={Spaces.TWO}>
+	margin-right: 10px;
+	border-radius: 1.2rem;
+	`
+
+
+export function BandCardLoader({ name, bandImage, albumImage1, albumImage2,verMais, id }) {
+	return (
+		<div className='d-flex justify-content-center mb-5'>
+		<Section>
+		<div>
+		<Card>
+			<BandImage >
 				<Skeleton/>
-			</Box>
+				<BandInfo>
+
+				<Skeleton/>
+
+				</BandInfo>
+			</BandImage>
 		</Card>
+		</div>
+		<AlbumContainer>
+			<AlbunsImages  >
+				<Skeleton/>
+			</AlbunsImages>
+
+			<AlbunsImages  >
+				<Skeleton/>
+			</AlbunsImages>
+	
+			<AlbunsImages className='m-0'  >
+				<Skeleton/>
+			</AlbunsImages>
+			
+		
+			
+
+		</AlbumContainer>
+		</Section>
+		</div>
 	);
 }
