@@ -1,13 +1,15 @@
 import React from 'react';
 import { Flex, Box } from 'reflexbox';
 import { SearchField } from '../common-components/SearchField/SearchField';
-import { Spaces } from '../shared/DesignTokens';
+import { Spaces, BorderRadiuses } from '../shared/DesignTokens';
 import { BandCard } from '../common/BandCard/BandCard';
 import { BandCardLoader } from '../common/BandCard/BandCardLoader';
 import styled from 'styled-components';
-import $, { map } from 'jquery';
+import $ from 'jquery';
 import {HeadingThree} from '../common-components/Tipografia/HeadingThree';
 import {InfoApresentation} from '../common/InfoApresentation/InfoApresentation';
+import { Button } from "../common-components/Button/Button"	;
+import searchIcon from '../assets/icons/search.svg';
 
 const BandGrid = styled(Box)`
 
@@ -44,6 +46,13 @@ const BandGrid = styled(Box)`
 	}
 `;
 
+const Icon = styled.img.attrs({
+	src: searchIcon,
+})`
+	width: 23px;
+	height: 23px;
+`;
+
 const MarginBottom = styled.div`
 	margin-bottom: 120px;
 `
@@ -51,6 +60,18 @@ const MarginBottom = styled.div`
 const MarginY = styled.div`
 	margin: 60px 0px 60px 0px;
 `
+
+const Wrapper = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	grid-template-columns: 16px 1fr;
+	gap: ${Spaces.TWO};
+	padding: ${Spaces.NONE} ${Spaces.NONE} ${Spaces.NONE} ${Spaces.TWO};
+	background: white;
+	border-radius: ${BorderRadiuses.ONE};
+	
+`;
 
 
 export function Search() {
@@ -99,11 +120,7 @@ function searchBand(band) {
 	React.useEffect(() => {
 		if (search.doSearch) {
 			searchBand(search.value).then((bands) => {
-				// if (bands.data = []) {
-
-				// }
 			setBands(newBand(bands.data));
-			console.log(newBand(bands.data))
 			setSearch((prevValue) => ({ ...prevValue, doSearch: false}));
 			
 			setIsLoading(false)
@@ -115,7 +132,7 @@ function searchBand(band) {
 		searchBand('rock').then((bands) => {
 
 			setBands(newBand(bands.data))
-			console.log(newBand(bands.data))
+			// console.log(newBand(bands.data))
 			setIsLoading(false);
 		});
 	}, []);
@@ -130,9 +147,13 @@ function searchBand(band) {
 		const bandArray = bandas.filter((valorAtual) =>{
 			
 			//esse trecho cria um array apenas com os albuns correspondentes ao id do artista do valorAtual
+
 			let bandAlbums = []
-			const albunsFilter = bandas.filter ((albumAtual) =>{
-				if (albumAtual.artist.id === valorAtual.artist.id) {
+			const albunsFilter = bandas.filter ((albumAtual, indice) =>{
+				
+
+
+				if (albumAtual.artist.id === valorAtual.artist.id ) {
 					bandAlbums.push(albumAtual.album)
 			}});
 
@@ -160,7 +181,6 @@ function searchBand(band) {
 
 
 
-
 	return (
 		
 		<>
@@ -172,13 +192,19 @@ function searchBand(band) {
 			
 
 				<HeadingThree className='mb-4'>Campo de Busca</HeadingThree>
+				<Wrapper>
 				<SearchField
 				placeholder="Digite uma banda"
-				onKeyUp={handleUpdateSearchValue}
-				onClick={handleSearch}
-				/>
-		
+				onKeyUp={handleUpdateSearchValue}>
+				</SearchField>
 
+				<div>
+				<Button onClick={handleSearch}>
+               	<Icon className="me-4"/> 
+               	Buscar
+            </Button>
+			</div>
+				</Wrapper>
 		<MarginY>
 		<BandGrid >
 		
@@ -213,8 +239,8 @@ function searchBand(band) {
 				id={band.artist.id}
 				name={band.artist.name}
 				bandImage={band['artist']['picture_medium']}
-				albumImage1= {band.albuns[0]?.cover_medium}
-				albumImage2= {band.albuns[1]?.cover_medium}
+				albumImage1= {band.albuns[0]?.cover_big}
+				albumImage2= {band.albuns[1]?.cover_big}
 				verMais= {band.musics.length}
 			/>
 	
