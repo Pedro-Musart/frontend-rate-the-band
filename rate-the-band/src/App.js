@@ -13,7 +13,10 @@ import {configure} from 'axios-hooks';
 const router = createBrowserRouter ([
   {
     path: '/detalhes/:id',
-    element: <Details></Details>,
+    element: <Details>
+
+    
+    </Details>,
   },
 
   {

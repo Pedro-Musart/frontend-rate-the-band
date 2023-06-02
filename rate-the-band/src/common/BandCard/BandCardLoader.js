@@ -14,6 +14,9 @@ import {
 	FontFamilies,
 	FontWeights,
 } from '../../shared/DesignTokens';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css'
+
 
 const Section = styled.section`
 display: flex;
@@ -28,6 +31,7 @@ const BandImage = styled.div`
 	width: 207px;
 	height: 207px;
 	display:flex;
+	border: 1px solid #3b3b3b ;
 	align-items: end;
 	justify-content: left;
 	border-radius: ${BorderRadiuses.ONE};
@@ -51,100 +55,55 @@ const BandInfo= styled.div`
  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.27) 33.33%, rgba(0, 0, 0, 0.55) 62.5%, #000000 95.83%);
  border-radius: 0px 0px 20px 20px;
 `
-const BandName = styled.h5`
-	font-family: ${FontFamilies.PRIMARY};
-	font-weight: ${FontWeights.BOLD};
-	font-size: ${FontSizes.H5};
-	color: ${Colors.NEUTRAL_WHITE};
-	margin: 0;
-	padding: 0;
 
-	@media (max-width: 700px) {
-	font-weight: ${FontWeights.REGULAR};
-`
 
 const AlbumContainer = styled.div`
 	display: flex;
 	width: 100%;
+	height: 63px;
 	margin-top: 10px;
 `
 
 const AlbunsImages = styled.div`
 	flex: 1 ;
+	
 	margin-right: 10px;
 	border-radius: 1.2rem;
-	background-image: url('${(props) => props.src}');
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center;
 	`
 
-const MoreInfo = styled.div`
-	flex: 1 ;
-	height: 63px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	@media (max-width: 700px) {
-	height: 46px;
-`
 
-const Button = styled.button`
-	border: none;
-	outline: none;
-	width:100%;
-	height: 100%;
-	font-family: ${FontFamilies.PRIMARY};
-	font-weight: ${FontWeights.BOLD};
-	background-color: ${Colors.NEUTRAL_PURPLE};
-	color: ${Colors.NEUTRAL_WHITE};
-	box-shadow: ${Shadows.ONE};
-	border-radius: 1.2rem;
-	cursor: pointer;
-	transition: 200ms all ease;	
-	font-size: ${FontSizes.BASE};
-	display: flex;
-	justify-content: center;
- 	align-items: center;
-	&:hover {
-		background-color: ${Colors.NEUTRAL_PURPLE1};
-	}
-`
-
-export function BandCard({ name, bandImage, albumImage1, albumImage2,verMais, id }) {
+export function BandCardLoader({ name, bandImage, albumImage1, albumImage2,verMais, id }) {
 	return (
 		<div className='d-flex justify-content-center mb-5'>
 		<Section>
 		<div>
 		<Card>
-			<BandImage  src={bandImage}>
+			<BandImage >
+				<Skeleton/>
 				<BandInfo>
 
-				<BandName>{name}</BandName>
+				<Skeleton/>
 
 				</BandInfo>
 			</BandImage>
 		</Card>
 		</div>
 		<AlbumContainer>
-			<AlbunsImages  src={albumImage1}>
-				
+			<AlbunsImages  >
+				<Skeleton/>
 			</AlbunsImages>
 
-			{albumImage2 && (
-			<>
-			<AlbunsImages src={albumImage2}></AlbunsImages>	
-			</>
-			)}
-			
-			<MoreInfo >
-			
+			<AlbunsImages  >
+				<Skeleton/>
+			</AlbunsImages>
 	
-			<Button>
-			{verMais}+
-			</Button>
+			<AlbunsImages className='m-0'  >
+				<Skeleton/>
+			</AlbunsImages>
+			
 		
-			</MoreInfo>
+			
+
 		</AlbumContainer>
 		</Section>
 		</div>

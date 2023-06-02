@@ -1,3 +1,5 @@
+
+import { Button } from "../Button/Button";
 import styled from 'styled-components';
 import {
 	BorderRadiuses,
@@ -7,49 +9,56 @@ import {
 	FontSizes,
 	Spaces,
 } from '../../shared/DesignTokens';
+
 import searchIcon from '../../assets/icons/search.svg';
+
 const Wrapper = styled.div`
-	display: grid;
+	display: flex;
+	justify-content: space-between;
 	align-items: center;
 	grid-template-columns: 16px 1fr;
 	gap: ${Spaces.TWO};
-	padding: ${Spaces.NONE} ${Spaces.TWO};
-	background-color: ${Colors.GRAY_200};
+	padding: ${Spaces.NONE} ${Spaces.NONE} ${Spaces.NONE} ${Spaces.TWO};
+	background: white;
 	border-radius: ${BorderRadiuses.ONE};
-	height: 40px;
+	
 `;
+
+
 const Icon = styled.img.attrs({
 	src: searchIcon,
 })`
-	width: 16px;
-	height: 16px;
+	width: 23px;
+	height: 23px;
 `;
 const Input = styled.input`
-	font-size: ${FontSizes.TWO};
+	font-size: ${FontSizes.BASE};
 	font-family: ${FontFamilies.PRIMARY};
 	border: none;
 	outline: none;
-	padding: ${Spaces.ONE};
-	color: ${Colors.GRAY_600};
+	padding-start: ${Spaces.TWO};
+	border-radius: ${BorderRadiuses.ONE};
+	
 	background: none;
-	letter-spacing: ${FontLetterSpacings.MEDIUM};
 	&::placeholder {
-		color: ${Colors.GRAY_400};
+		color: ${Colors.NEUTRAL_BLACK};
 		opacity: 1;
 	}
-	&:-ms-input-placeholder {
-		color: ${Colors.GRAY_400};
-	}
-	&::-ms-input-placeholder {
-		color: ${Colors.GRAY_400};
-	}
+
 `;
 
 export function SearchField(props) {
 	return (
 		<Wrapper>
-			<Icon />
-			<Input {...props} type="text" />
+			<div>
+			<Input {...props} type="text" ></Input>
+			</div>
+			<div >
+			<Button  {...props} >
+               <Icon className="me-4"/> 
+               Buscar
+            </Button>
+			</div>
 		</Wrapper>
 	);
 }
