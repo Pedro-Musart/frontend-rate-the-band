@@ -5,6 +5,7 @@ import { Caption } from '../../common-components/Tipografia/Caption';
 import { Description } from '../../common-components/Tipografia/Description';
 import { HeadingTwo } from '../../common-components/Tipografia/HeadingTwo';
 import { ButtonLink } from '../../common-components/ButtonLink/ButtonLink';
+import { Stars } from '../../common-components/Stars/Stars';
 import {
 	BorderRadiuses,
 	Colors,
@@ -81,15 +82,18 @@ const AlbunsImages = styled.div`
 
 const MoreInfo = styled.div`
 	flex: 1 ;
+	width: 63px;
 	height: 63px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	@media (max-width: 700px) {
+	width:  46px;
 	height: 46px;
 `
 
 const Button = styled.button`
+	
 	border: none;
 	outline: none;
 	width:100%;
@@ -113,6 +117,7 @@ const Button = styled.button`
 
 export function BandCard({ name, bandImage, albumImage1, albumImage2,verMais, id }) {
 	return (
+
 		<div className='d-flex justify-content-center mb-5'>
 		<Section>
 		<div>
@@ -121,7 +126,9 @@ export function BandCard({ name, bandImage, albumImage1, albumImage2,verMais, id
 				<BandInfo>
 
 				<BandName>{name}</BandName>
-
+				<div className='w-75'>
+					<Stars></Stars>
+				</div>
 				</BandInfo>
 			</BandImage>
 		</Card>
@@ -139,11 +146,11 @@ export function BandCard({ name, bandImage, albumImage1, albumImage2,verMais, id
 			
 			<MoreInfo >
 			
-	
 			<Button>
+			<ButtonLink to={`/details/${id}`}>
 			{verMais}+
+			</ButtonLink>
 			</Button>
-		
 			</MoreInfo>
 		</AlbumContainer>
 		</Section>

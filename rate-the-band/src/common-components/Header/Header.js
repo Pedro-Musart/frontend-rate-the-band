@@ -82,13 +82,18 @@ const Background = styled.div`
       
       <Navbar  className="d-flex justify-content-between">
       <Logo/>
-      <div className="d-flex justify-content-between">
+      <div className="d-flex justify-content-between align-items-center">
              <Link className="me-4">Home</Link>
             <Link className="me-4">Procurar</Link>
-            <Button>
-               <GithubIcon/> 
+         
+            <form  method = 'get'
+                action = 'https://github.com/Pedro-Musart/rate-the-band'>
+                <Button >
+                 <GithubIcon/> 
                Github
             </Button>
+            </form>
+         
       </div>
    </Navbar>
    }

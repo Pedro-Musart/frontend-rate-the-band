@@ -38,7 +38,7 @@ const Input = styled.input`
 	outline: none;
 	padding-start: ${Spaces.TWO};
 	border-radius: ${BorderRadiuses.ONE};
-	
+	width: 40vw;
 	background: none;
 	&::placeholder {
 		color: ${Colors.NEUTRAL_BLACK};
@@ -47,18 +47,13 @@ const Input = styled.input`
 
 `;
 
-export function SearchField(props) {
+export function SearchField(name ,click) {
 	return (
 		<Wrapper>
 			<div>
-			<Input {...props} type="text" ></Input>
+			<Input {...name} type="text" ></Input>
 			</div>
-			<div >
-			<Button  {...props} >
-               <Icon className="me-4"/> 
-               Buscar
-            </Button>
-			</div>
+
 		</Wrapper>
 	);
 }

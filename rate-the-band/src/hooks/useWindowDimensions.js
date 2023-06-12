@@ -28,7 +28,7 @@ export function useWindowDimensions() {
 
     useEffect(() => {
       setIsTab(windowDimensions.width < 991 ? true: false);
-      setIsMobile(windowDimensions.width < 400 ? true: false);
+      setIsMobile(windowDimensions.width < 550 ? true: false);
     }, [windowDimensions]);
 
     return {isTab,isMobile}
