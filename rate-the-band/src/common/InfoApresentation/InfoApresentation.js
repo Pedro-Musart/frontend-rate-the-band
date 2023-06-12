@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { Colors, Spaces, FontSizes, FontFamilies, FontWeights, BorderRadiuses} from "../../shared/DesignTokens";
 import { Button } from "../../common-components/Button/Button";
 import React from 'react';
@@ -119,12 +119,14 @@ export function InfoApresentation () {
                 
 
             {!isMobile && (
-            <div style={{width: '185px'}}>
-            <Button>
+                <form style={{width: '185px'}} method = 'get'
+                action = 'https://github.com/Pedro-Musart/rate-the-band'>
+                
+                <Button className='mt-5'>
                  <GithubIcon/> 
                Github
             </Button>
-            </div>
+            </form>
             )}
 
             </div>
@@ -142,10 +144,13 @@ export function InfoApresentation () {
             </Card>
 
             {isMobile && (
+                <form form method = 'get'
+                action = 'https://github.com/Pedro-Musart/rate-the-band'>
                 <Button className='mt-5'>
                  <GithubIcon/> 
                Github
             </Button>
+            </form>
             )}
         </Section>
         </div>

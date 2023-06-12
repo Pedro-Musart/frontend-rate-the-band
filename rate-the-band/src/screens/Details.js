@@ -1,28 +1,19 @@
 import styled from 'styled-components';
-import { Box } from 'reflexbox';
-import { Card } from '../common-components/Card/Card';
-import { Caption } from '../common-components/Tipografia/Caption';
-import { Description } from '../common-components/Tipografia/Description';
 import { HeadingTwo } from '../common-components/Tipografia/HeadingTwo';
-import { ButtonLink } from '../common-components/ButtonLink/ButtonLink';
 import {
 	BorderRadiuses,
 	Colors,
-	Shadows,
-	Spaces,
-	FontSizes,
-	FontFamilies,
-	FontWeights,
 } from '../shared/DesignTokens';
 import background from '../assets/images/background.svg' 
-import { InfoApresentation
- } from '../common/InfoApresentation/InfoApresentation';
 import { Stars } from '../common-components/Stars/Stars';
 import { Button } from '../common-components/Button/Button';
-import { useBand } from '../hooks/useBand';
+import { useBand, useAlbumSearch } from '../hooks/useBand';
 import { useParams } from 'react-router';
 import { HeadingFour } from '../common-components/Tipografia/HeadingFour';
 import { HeadingFive } from '../common-components/Tipografia/HeadingFive';
+
+import { OEmbed } from '../common-components/OEmbed/OEmbed';
+import { AlbumsList } from '../common/AlbumsList/AlbumsList';
 
 const Background = styled.div`
     justify-content: center;
@@ -122,22 +113,18 @@ const Padding = styled.div`
 `
 
 
-export function Details(bandImage) {
+export function Details() {
 
 
 	const { id } = useParams();
 	const { band, isLoading } = useBand(id);
     
-	console.log(band);
-
-
 
     return (
         <>
         <div>
-            <Background src={background}> 
+            <Background src={background}/> 
            
-            </Background>
             
             <div className='container'>
             {!isLoading && (
@@ -188,6 +175,15 @@ export function Details(bandImage) {
         </>
         )}
             </div>
+
+        {!isLoading && (
+            <>
+             <AlbumsList id={id}>
+            </AlbumsList>
+            </>
+        )}
+       
+          
 
             
         </>

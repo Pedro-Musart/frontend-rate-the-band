@@ -38,7 +38,7 @@ const Input = styled.input`
 	outline: none;
 	padding-start: ${Spaces.TWO};
 	border-radius: ${BorderRadiuses.ONE};
-	width: 55vw;
+	width: 40vw;
 	background: none;
 	&::placeholder {
 		color: ${Colors.NEUTRAL_BLACK};
