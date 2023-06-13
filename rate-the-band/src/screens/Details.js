@@ -11,7 +11,7 @@ import { useBand, useAlbumSearch } from '../hooks/useBand';
 import { useParams } from 'react-router';
 import { HeadingFour } from '../common-components/Tipografia/HeadingFour';
 import { HeadingFive } from '../common-components/Tipografia/HeadingFive';
-
+import { useBandSearch } from '../hooks/useBandSearch';
 import { OEmbed } from '../common-components/OEmbed/OEmbed';
 import { AlbumsList } from '../common/AlbumsList/AlbumsList';
 
@@ -118,8 +118,10 @@ export function Details() {
 
 	const { id } = useParams();
 	const { band, isLoading } = useBand(id);
+ 
     
 
+  
     return (
         <>
         <div>
@@ -178,7 +180,7 @@ export function Details() {
 
         {!isLoading && (
             <>
-             <AlbumsList id={id}>
+             <AlbumsList name={band.name}>
             </AlbumsList>
             </>
         )}

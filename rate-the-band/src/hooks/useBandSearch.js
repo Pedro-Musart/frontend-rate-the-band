@@ -1,56 +1,45 @@
-import React, {
-    useEffect,
-    useState
-} from "react";
-import $ from 'jquery';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
 
 
 export function useBandSearch(BandName) {
-    const [bands, setBands] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+  const [bands, setBands] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            setIsLoading(true);
-            try {
-                const response = await search(BandName);
-                setBands(newBand(response.data));
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const response = await search(BandName);
+        setBands(newBand(response.data));
+        setIsLoading(false);
+      } catch (error) {
+        console.error(error);
+        setIsLoading(false);
+      }
+    };
 
-                setIsLoading(false);
-            } catch (error) {
-                console.error(error);
-                setIsLoading(false);
-            }
-        };
+    fetchData();
+  }, [BandName]);
 
-        fetchData();
+  async function search(name) {
+    const options = {
+      method: "GET",
+      url: `https://deezerdevs-deezer.p.rapidapi.com/search?q=artist:"${name}"`,
 
-    }, [BandName]);
+    };
 
-
-    function search(name) {
-        const url = `http://api.deezer.com/search?q=artist:"${name}"&output=jsonp`;
-        setIsLoading(true);
-        return new Promise((resolve, reject) => {
-            $.ajax({
-                type: 'GET',
-                url,
-                dataType: 'jsonp',
-                contentType: 'application/json; charset=utf-8',
-                jsonpCallback: 'jsonCallback',
-                cache: false,
-                beforeSend: (xhr) => {
-                    // função antes de executar a chamada
-                },
-                success: (data) => {
-                    resolve(data);
-                },
-                error: (xhr, status, error) => {
-                    reject(error);
-                }
-            });
-        });
+    setIsLoading(true);
+    try {
+      const response = await axios.request(options);
+      return response.data;
+    } catch (error) {
+      throw new Error(error);
     }
+  }
+
+
 
 
     //a API do deezer retorna varios albuns com diversos artistas repetidos, essa função retorna um map organizado com as informações de cada artista/banda e todos os albuns relacionados a ele

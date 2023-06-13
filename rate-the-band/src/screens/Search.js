@@ -57,6 +57,7 @@ const Wrapper = styled.div`
 `;
 
 export function Search() {
+
 	function handleUpdateSearchValue({
 		target: {
 			value
@@ -72,7 +73,8 @@ export function Search() {
 		setSearch((prevValue) => ({
 			...prevValue,
 			doSearch: true
-		}));
+		})
+    );
 	}
 
 	const [bandName, setBandName] = React.useState('rock');
@@ -81,23 +83,28 @@ export function Search() {
 		doSearch: false,
 	});
 
+
+  
 	React.useEffect(() => {
 		if (search.doSearch) {
 			setBandName(search.value);
+      
 			setSearch((prevValue) => ({
 				...prevValue,
 				doSearch: false
-			}));
-		}
+			})
+      );
+    
+    }
 	}, [search]);
+
 
 	const {
 		bands,
 		isLoading
 	} = useBandSearch(bandName);
 
-  console.log(bands)
-
+console.log(bands)
   return (
     <>
       <main className="container-xl">

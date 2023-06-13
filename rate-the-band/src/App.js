@@ -1,3 +1,4 @@
+import React, { Component } from 'react';
 import { Search } from './screens/Search';
 import { Details } from './screens/Details';
 import { NotFound } from './screens/NotFound';
@@ -8,7 +9,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import {configure} from 'axios-hooks';
 
-// configure({ baseURL: process.env.REACT_APP_LAST_FM_API_BASE_URL });
+
+axios.defaults.headers.common['X-RapidAPI-Key'] = '484fd08efemsh75925b398a33218p1d0715jsn7fafad11d5f1';
+axios.defaults.headers.common['X-RapidAPI-Host'] = 'deezerdevs-deezer.p.rapidapi.com';
 
 const router = createBrowserRouter ([
   {
@@ -18,6 +21,7 @@ const router = createBrowserRouter ([
 
   {
     path: '/search',
+    path: '/',
     element: <Search></Search>,
   },
 
