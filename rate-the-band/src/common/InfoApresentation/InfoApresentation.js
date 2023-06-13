@@ -112,7 +112,7 @@ export function InfoApresentation () {
     return(
         <div className='container'>
         
-        <Section className='row py-5'>
+        <Section className='row'>
             <div className='d-flex col-12 col-sm-5 col-md-5 col-xl-6 justify-content-between flex-column py-5 '>
                 <HeadingOne>Busque Artistas &  Avalie</HeadingOne>
                 <Description className='my-4'>Busque seus artistas favoritos e dê uma avaliação a eles! Funciona através da API do deezer.</Description>

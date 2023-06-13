@@ -25,7 +25,8 @@ const Navbar = styled.header`
  align-items: center;
 animation: ${fadeInAnimation} 300ms;
 @media (max-width: 990px) {
-   flex-direction: column;    
+   flex-direction: column; 
+   padding: ${Spaces.NONE} ${Spaces.THREE};   
 	`;
 
 const Responsive = styled.div`
@@ -42,7 +43,7 @@ const Background = styled.div`
     src: rateTheBandLogo,
     alt: 'Logo "Rate The Band"'
  })`
- width:25rem;
+ width:20rem;
  @media (max-width: 990px) {
    width:15rem;  
 } 
