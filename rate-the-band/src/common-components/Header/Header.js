@@ -21,7 +21,7 @@ const fadeInAnimation = keyframes`
 const Navbar = styled.header`
  width: 100%;
  background-color: ${Colors.NEUTRAL_BLACK};
- padding: ${Spaces.THREE} ${Spaces.SIX};
+ padding: ${Spaces.NONE} ${Spaces.SIX};
  align-items: center;
 animation: ${fadeInAnimation} 300ms;
 @media (max-width: 990px) {
@@ -42,7 +42,11 @@ const Background = styled.div`
     src: rateTheBandLogo,
     alt: 'Logo "Rate The Band"'
  })`
- height: 100%
+ width:25rem;
+ @media (max-width: 990px) {
+   width:15rem;  
+} 
+	
  `;
 
 
