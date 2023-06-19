@@ -2,7 +2,7 @@ import { useOEmbed } from "../../hooks/useOEmbed";
 
 
 export function OEmbed({id}){
-console.log(id)
+
     return(
         <>
         <div className="container">

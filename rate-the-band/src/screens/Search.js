@@ -10,6 +10,7 @@ import { InfoApresentation } from '../common/InfoApresentation/InfoApresentation
 import { Button } from "../common-components/Button/Button";
 import searchIcon from '../assets/icons/search.svg';
 import { useBandSearch } from '../hooks/useBandSearch';
+import { Preloader } from '../common/Preloader/Preloader';
 
 const BandGrid = styled(Box)`
   display: grid;
@@ -107,6 +108,7 @@ export function Search() {
 console.log(bands)
   return (
     <>
+    <Preloader />
       <main className="container-xl">
         <MarginBottom>
           <InfoApresentation></InfoApresentation>

@@ -43,9 +43,9 @@ const Background = styled.div`
     src: rateTheBandLogo,
     alt: 'Logo "Rate The Band"'
  })`
- width:20rem;
+ width:15rem;
  @media (max-width: 990px) {
-   width:15rem;  
+   width:10rem;  
 } 
 	
  `;
@@ -86,11 +86,19 @@ const Background = styled.div`
       Estado = 
       
       <Navbar  className="d-flex justify-content-between">
-      
-      <Logo/>
+                  <a href='/'>
+                  <Logo/>           
+                  </a>
+    
       <div className="d-flex justify-content-between align-items-center">
-             <Link className="me-4">Home</Link>
-            <Link className="me-4">Procurar</Link>
+            <a href='/'>
+            <Link className="me-4" >Home</Link>
+            </a>
+            <a >
+            <Link className="me-4" >Procurar</Link>
+            </a>
+
+            
          
             <form  method = 'get'
                 action = 'https://github.com/Pedro-Musart/rate-the-band'>
@@ -104,12 +112,14 @@ const Background = styled.div`
    </Navbar>
    }
 
-   //estado 1
+  
    if (isTab) {
    Estado = 
       <Navbar className="d-flex justify-content-between">
       <div className="d-flex w-100 justify-content-between">
-         <Logo />
+         <a href='/'>
+         <Logo/>           
+         </a>
          {!menuClick &&(
                       <button type="button" onClick={() => setMenuClick(true)} className="btn" >
             <NavIcon/>
@@ -125,13 +135,19 @@ const Background = styled.div`
          
          {menuClick && (
             
-                     <Responsive>
-             <Link className="me-4">Home</Link>
+            
+            <Responsive>
+            <a href='/'>
+            <Link className="me-4" >Home</Link>
+            </a>
             <Link className="me-4">Procurar</Link>
-            <Button>
-               <GithubIcon/> 
+            <form  method = 'get'
+                action = 'https://github.com/Pedro-Musart/rate-the-band'>
+                <Button >
+                 <GithubIcon/> 
                Github
             </Button>
+            </form>
             
       
          </Responsive>

@@ -14,6 +14,8 @@ import { HeadingFive } from '../common-components/Tipografia/HeadingFive';
 import { useBandSearch } from '../hooks/useBandSearch';
 import { OEmbed } from '../common-components/OEmbed/OEmbed';
 import { AlbumsList } from '../common/AlbumsList/AlbumsList';
+import { Preloader } from '../common/Preloader/Preloader';
+import ScrollToTop from '../common/ScrollToTop/ScrollToTop';
 
 const Background = styled.div`
     justify-content: center;
@@ -124,6 +126,8 @@ export function Details() {
   
     return (
         <>
+        <ScrollToTop></ScrollToTop>
+        <Preloader/>
         <div>
             <Background src={background}/> 
            
