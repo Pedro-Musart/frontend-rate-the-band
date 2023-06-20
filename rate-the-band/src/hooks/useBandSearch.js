@@ -13,6 +13,7 @@ export function useBandSearch(BandName) {
       try {
         const response = await search(BandName);
         setBands(newBand(response.data));
+        console.log(response.data)
         setIsLoading(false);
       } catch (error) {
         console.error(error);
@@ -39,7 +40,7 @@ export function useBandSearch(BandName) {
     }
   }
 
-
+  
 
 
     //a API do deezer retorna varios albuns com diversos artistas repetidos, essa função retorna um map organizado com as informações de cada artista/banda e todos os albuns relacionados a ele
@@ -59,6 +60,8 @@ export function useBandSearch(BandName) {
                 bandAlbums.push(albumAtual.album)
               }
             });
+
+            
 
             let bandMusics = []
             const musicsFilter = bandas.filter((musicaAtual) => {

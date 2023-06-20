@@ -184,7 +184,7 @@ export function Details() {
 
         {!isLoading && (
             <>
-             <AlbumsList name={band.name}>
+             <AlbumsList name={band.name} id={id}>
             </AlbumsList>
             </>
         )}

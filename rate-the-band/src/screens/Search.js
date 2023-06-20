@@ -11,6 +11,7 @@ import { Button } from "../common-components/Button/Button";
 import searchIcon from '../assets/icons/search.svg';
 import { useBandSearch } from '../hooks/useBandSearch';
 import { Preloader } from '../common/Preloader/Preloader';
+import DefaultBands from '../common-components/Data/DefaultBands';
 
 const BandGrid = styled(Box)`
   display: grid;
@@ -78,7 +79,7 @@ export function Search() {
     );
 	}
 
-	const [bandName, setBandName] = React.useState('rock');
+	const [bandName, setBandName] = React.useState('');
 	const [search, setSearch] = React.useState({
 		value: "",
 		doSearch: false,
@@ -154,6 +155,17 @@ console.log(bands)
                 <BandCardLoader />
               </>
             )}
+
+            {!bandName && DefaultBands.map((band) => (
+              <BandCard
+                id={band.artist.id}
+                name={band.artist.name}
+                bandImage={band['artist']['picture_medium']}
+                albumImage1={band.albuns[0]?.cover_big}
+                albumImage2={band.albuns[1]?.cover_big}
+                verMais={band.musics.length}
+              />
+            ))}
 
             {!isLoading && bands.map((band) => (
               <BandCard

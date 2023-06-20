@@ -33,7 +33,7 @@ const AnimationDiv = styled.div`
     justify-content: center;
     align-items:center;
     overflow:hidden;
-    animation: ${fadeInAnimation} 2.0s ;
+    animation: ${fadeInAnimation} 3.0s ;
 `
 
 
@@ -44,7 +44,9 @@ const Animation = styled.img.attrs({
  })`
 
  width:25rem;
-
+ @media (max-width: 990px) {
+    width:15rem;  
+ } 
 	
  `;
 
@@ -56,7 +58,7 @@ export const Preloader = () => {
 
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 3000);
     
 
     return (

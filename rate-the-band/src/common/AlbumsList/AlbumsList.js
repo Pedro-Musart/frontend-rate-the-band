@@ -1,33 +1,35 @@
 import { useAlbumSearch } from "../../hooks/useBand";
 import { OEmbed } from "../../common-components/OEmbed/OEmbed";
 import React, { useEffect, useState } from "react";
-import { useBandSearch } from "../../hooks/useBandSearch";
 
 
+const DelayedRender = ({ delay, children }) => {
+    const [shouldRender, setShouldRender] = useState(false);
 
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        setShouldRender(true);
+      }, delay);
 
-export function AlbumsList({ name }) {
+      return () => clearTimeout(timer);
+    }, [delay]);
 
-  const { bands, isLoading} = useBandSearch(name);
+    return shouldRender ? children : null;
+  };
 
-  const newBand = bands.filter((band) => band.artist.name === name )
+export function AlbumsList({ id }) {
 
-  console.log(newBand)
-
-  const albumIds = newBand.map((band) => band.albuns.map((album) => album.id)).flat();
-
+  const { album, isLoadingAlbum } = useAlbumSearch(id);
 
   return (
     <>
 
-   
-
-      {!isLoading && albumIds.map((albumId, index) => {
-        const delay = 1000 * index; // Atraso em milissegundos para cada iteração
-
+      {!isLoadingAlbum && album.map((album, index) => {
+        const delay = 500 * index; // Atraso em milissegundos para cada iteração
         return (
-
-            <OEmbed id={albumId} />
+          <DelayedRender delay={delay} key={album.id}>
+            <OEmbed id={album.id} />
+          </DelayedRender>
 
         );
       })} 
