@@ -1,5 +1,7 @@
 import styled from 'styled-components';
+
 import {
+	BorderRadiuses,
 	Colors,
 	FontFamilies,
 	FontLetterSpacings,
@@ -10,11 +12,13 @@ export const SelectField = styled.select`
 	font-size: ${FontSizes.TWO};
 	font-family: ${FontFamilies.PRIMARY};
 	border: none;
-	border-bottom: 1px solid ${Colors.GRAY_200};
+	border-radius: 12px; 
+	border-bottom: 1px solid ${Colors.NEUTRAL_WHITE};
 	outline: none;
+	width:100%;
 	padding: ${Spaces.ONE} ${Spaces.EIGHT} ${Spaces.ONE} ${Spaces.ONE};
 	color: ${Colors.NEUTRAL_BLACK};
-	background: none;
+	background: ${Colors.NEUTRAL_WHITE};
 	letter-spacing: ${FontLetterSpacings.MEDIUM};
 	&::placeholder {
 		color: ${Colors.GRAY_400};

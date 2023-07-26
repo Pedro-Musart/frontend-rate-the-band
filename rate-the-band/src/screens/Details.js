@@ -11,16 +11,18 @@ import { useBand, useAlbumSearch } from '../hooks/useBand';
 import { useParams } from 'react-router';
 import { HeadingFour } from '../common-components/Tipografia/HeadingFour';
 import { HeadingFive } from '../common-components/Tipografia/HeadingFive';
-import { useBandSearch } from '../hooks/useBandSearch';
-import { OEmbed } from '../common-components/OEmbed/OEmbed';
 import { AlbumsList } from '../common/AlbumsList/AlbumsList';
 import { Preloader } from '../common/Preloader/Preloader';
 import ScrollToTop from '../common/ScrollToTop/ScrollToTop';
+import { useFormik } from 'formik';
+import { SelectField, Option } from '../common-components/SelectField/SelectField';
+import { Alert } from '../common-components/Alert/Alert';
+import * as yup from 'yup';
 
 const Background = styled.div`
     justify-content: center;
     width: 100%;
-    height: 320px; 
+    height: 200px; 
 	background: linear-gradient(180deg, rgba(0, 0, 0, 0) 13.54%, #2B2B2B 95.31%), url('${(props) => props.src}');
     background-repeat: no-repeat;
     background-position: center; 
@@ -119,8 +121,21 @@ export function Details() {
 
 
 	const { id } = useParams();
-	const { band, isLoading } = useBand(id);
- 
+	const { band, isLoading, setBandAvaliation, getBandAvaliation } = useBand(id);
+    
+
+    const formik = useFormik({
+        initialValues: getBandAvaliation(id) || { avaliation: '' },
+		validationSchema: yup.object().shape({
+			avaliation: yup.string().required(),
+		}),
+		onSubmit: (values) => {
+			const bandAvaliation = { id, avaliation: values.avaliation };
+			setBandAvaliation(bandAvaliation);
+	
+			
+		},
+	});
     
 
   
@@ -153,10 +168,64 @@ export function Details() {
             </FlexTwo>
             <FlexThree>
                 <StarBox>
-                <Stars  />
+                    {getBandAvaliation(id) != null ? (
+                        <Stars number={getBandAvaliation(id).avaliation}  />
+                    ) : (
+                        <Stars number={0}  />
+                    )}
+                
                 </StarBox>
+
                 <div>
-                <Button> Avalie </Button>
+                <form onSubmit={formik.handleSubmit} noValidate> 
+		<div>
+			<SelectField 
+                className='mb-4'
+                name="avaliation"
+                onChange={formik.handleChange}
+                value={formik.values.avaliation}
+                required
+            >
+                    <Option value="" disabled> Selecione a nota</Option>
+                    <Option>5</Option>
+                    <Option>4</Option>
+                    <Option>3</Option>
+                    <Option>2</Option>
+                    <Option>1</Option>
+			</SelectField>
+			<div >
+				<Button type="submit">Avaliar</Button>
+                
+			</div>
+            
+            {formik.errors.avaliation && (
+                
+                    <Alert type="error">
+                        Escolha uma nota para ser atribuída
+                    </Alert>
+            )
+            }
+
+            
+            {formik.values.avaliation != "" && (
+                
+                <Alert type="success">
+                    Nota atribuída com sucesso!
+                </Alert>
+            )
+            }
+
+            {formik.errors.avaliation && (
+                            
+                    <Alert type="error">
+                        Escolha uma nota para ser atribuída
+                    </Alert>
+            )
+            }
+                        
+
+		</div>
+	</form>
                 </div>
             </FlexThree>
             </FlexOne>

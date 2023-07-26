@@ -6,6 +6,7 @@ import { Description } from '../../common-components/Tipografia/Description';
 import { HeadingTwo } from '../../common-components/Tipografia/HeadingTwo';
 import { ButtonLink } from '../../common-components/ButtonLink/ButtonLink';
 import { Stars } from '../../common-components/Stars/Stars';
+import { useBand } from '../../hooks/useBand';
 import {
 	BorderRadiuses,
 	Colors,
@@ -15,6 +16,7 @@ import {
 	FontFamilies,
 	FontWeights,
 } from '../../shared/DesignTokens';
+
 
 const Section = styled.section`
 display: flex;
@@ -115,7 +117,10 @@ const Button = styled.button`
 	}
 `
 
+
 export function BandCard({ name, bandImage, albumImage1, albumImage2,verMais, id }) {
+	const { band, isLoading, getBandAvaliation } = useBand(id);
+
 	return (
 
 		<div className='d-flex justify-content-center mb-5'>
@@ -127,7 +132,12 @@ export function BandCard({ name, bandImage, albumImage1, albumImage2,verMais, id
 
 				<BandName>{name}</BandName>
 				<div className='w-75'>
-					<Stars></Stars>
+			
+				{getBandAvaliation(id) != null ? (
+                        <Stars number={getBandAvaliation(id).avaliation}  />
+                    ) : (
+                        <Stars number={0}  />
+                    )}
 				</div>
 				</BandInfo>
 			</BandImage>

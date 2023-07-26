@@ -1,10 +1,18 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import $ from 'jquery';
-import axios from "axios";
+import useAxios from 'axios-hooks';
 
 export function useBand(bandId) {
   const [isLoading, setIsLoading] = useState(true);
   const [band, setBand] = useState(null);
+
+  function setBandAvaliation(band) { 
+      localStorage.setItem(band.id, JSON.stringify(band));
+    }
+  function getBandAvaliation(bandId) {
+    return JSON.parse(localStorage.getItem(bandId));
+  }
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,7 +59,7 @@ export function useBand(bandId) {
     
   }
 
-  return { band, isLoading };
+  return { band, isLoading, setBandAvaliation, getBandAvaliation };
 }
 
 export function useAlbumSearch(bandId) {
@@ -99,3 +107,5 @@ export function useAlbumSearch(bandId) {
 
   return { album, isLoading };
 }
+
+

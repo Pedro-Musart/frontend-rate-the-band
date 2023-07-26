@@ -1,7 +1,7 @@
 import star from '../../assets/icons/star.svg'
-import starTwo from '../../assets/icons/2star.svg'
+import emptyStar from '../../assets/icons/emptyStar.svg'
 import styled from 'styled-components';
-
+import { useBand } from '../../hooks/useBand';
 const Star = styled.img.attrs({
 	src: star,
 })`
@@ -10,10 +10,12 @@ const Star = styled.img.attrs({
     padding: 10%;
 `;
 
-const StarTwo = styled.img.attrs({
-	src: starTwo,
+
+const EmptyStar = styled.img.attrs({
+	src: emptyStar,
 })`
     width: 100%;
+    padding: 10%;
 `;
 
 const Flex = styled.div`
@@ -26,16 +28,22 @@ const Flex = styled.div`
     align-items: center;
 `
 
-export function Stars() {
+
+export function Stars({number}) {
+    var a = parseInt(number, 10);
+   
+  
     return (
-       <div>
-    <Flex>
-        <Star/>
-        <Star/>
-        <Star/>
-        <Star/>
-        <Star/>
-    </Flex>
-    </div>
-    )
-}
+        <div>
+       
+          <Flex>
+          {[...Array(a)].map((_, index) => (
+            <Star key={index} />
+          ))}
+          {[...Array(5 - a)].map((_, index) => (
+            <EmptyStar key={index} />
+          ))}
+             </Flex>
+        </div>
+      );
+    }

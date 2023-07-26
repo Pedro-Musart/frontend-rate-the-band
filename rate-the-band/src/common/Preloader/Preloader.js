@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import { Colors } from "../../shared/DesignTokens"
 import AnimationLogo from "../../assets/icons/animationLogo.gif"
 import { useState } from "react";
 import { keyframes } from "styled-components";
@@ -20,12 +19,10 @@ const fadeInAnimation = keyframes`
 const AnimationDiv = styled.div`
 
     height: 100vh;
-    widthl 100%;
+    width: 100%;
     background: #2a2a29;
     position:fixed;
     bottom:0;
-    left:0;
-    right:0;
     left:0;
     right:0;
     z-index:55;

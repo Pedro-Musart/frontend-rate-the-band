@@ -5,7 +5,8 @@ export const Colors = {
 	NEUTRAL_BLACK2: '#858584',
 	NEUTRAL_PURPLE: '#a259ff',
 	NEUTRAL_PURPLE1: '#7943be',
-	RED_800: '#CC0400',
+	RED_800: '#F02724',
+	
 };
 export const FontFamilies = {
 	PRIMARY: '"Work Sans", sans-serif',
