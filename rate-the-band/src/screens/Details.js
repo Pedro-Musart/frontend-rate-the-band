@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { HeadingTwo } from '../common-components/Tipografia/HeadingTwo';
 import {
@@ -122,7 +123,8 @@ export function Details() {
 
 	const { id } = useParams();
 	const { band, isLoading, setBandAvaliation, getBandAvaliation } = useBand(id);
-    
+    const [isSubmitted, setIsSubmitted] = React.useState(false);
+
 
     const formik = useFormik({
         initialValues: getBandAvaliation(id) || { avaliation: '' },
@@ -132,10 +134,17 @@ export function Details() {
 		onSubmit: (values) => {
 			const bandAvaliation = { id, avaliation: values.avaliation };
 			setBandAvaliation(bandAvaliation);
-	
-			
+            setIsSubmitted(true);
+            setTimeout(() => {
+                handleCloseAlert();
+              }, 6000);
+
 		},
 	});
+
+      const handleCloseAlert = () => {
+    setIsSubmitted(false);
+  };
     
 
   
@@ -207,9 +216,11 @@ export function Details() {
             }
 
             
-            {formik.values.avaliation != "" && (
+            {isSubmitted  && (
                 
+
                 <Alert type="success">
+                    {console.log(formik)}
                     Nota atribuída com sucesso!
                 </Alert>
             )
@@ -218,6 +229,7 @@ export function Details() {
             {formik.errors.avaliation && (
                             
                     <Alert type="error">
+                        {console.log(formik)}
                         Escolha uma nota para ser atribuída
                     </Alert>
             )

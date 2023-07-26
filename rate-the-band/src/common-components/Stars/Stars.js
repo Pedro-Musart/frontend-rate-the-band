@@ -1,3 +1,4 @@
+import React from 'react';
 import star from '../../assets/icons/star.svg'
 import emptyStar from '../../assets/icons/emptyStar.svg'
 import styled from 'styled-components';
@@ -30,20 +31,28 @@ const Flex = styled.div`
 
 
 export function Stars({number}) {
-    var a = parseInt(number, 10);
-   
-  
+
+  const [starsCount, setStarsCount] = React.useState(0);
+
+  React.useEffect(() => {
+    // Convertendo o número para inteiro e definindo o estado de starsCount
+    const parsedNumber = parseInt(number, 10);
+    setStarsCount(parsedNumber);
+  }, [number]);
+
     return (
+      
         <div>
        
           <Flex>
-          {[...Array(a)].map((_, index) => (
+          {[...Array(starsCount)].map((_, index) => (
             <Star key={index} />
           ))}
-          {[...Array(5 - a)].map((_, index) => (
+          {[...Array(5 - starsCount)].map((_, index) => (
             <EmptyStar key={index} />
           ))}
              </Flex>
         </div>
       );
     }
+     
