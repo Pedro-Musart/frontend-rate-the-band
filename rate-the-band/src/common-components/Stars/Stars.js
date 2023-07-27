@@ -1,20 +1,37 @@
 import React from 'react';
-import star from '../../assets/icons/star.svg'
+import star  from '../../assets/icons/star.svg'
 import emptyStar from '../../assets/icons/emptyStar.svg'
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { useBand } from '../../hooks/useBand';
+
+
+const fadeAnimation = keyframes`
+  0% {
+    transform: scale(0);
+  }
+ 
+  100% {
+    transform: scale(1);
+  }
+`;
+
 const Star = styled.img.attrs({
 	src: star,
 })`
-
+  animation-name: ${fadeAnimation};
+  animation-duration: 0.1s;
+  animation-timing-function: ease-out;
 	width: 100%;
-    padding: 10%;
+  padding: 10%;
 `;
 
 
 const EmptyStar = styled.img.attrs({
 	src: emptyStar,
 })`
+    animation-name: ${fadeAnimation};
+    animation-duration: 0.1s;
+    animation-timing-function: ease-out;
     width: 100%;
     padding: 10%;
 `;
