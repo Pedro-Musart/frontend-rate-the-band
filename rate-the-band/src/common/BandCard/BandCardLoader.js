@@ -1,18 +1,7 @@
 import styled from 'styled-components';
-import { Box } from 'reflexbox';
 import { Card } from '../../common-components/Card/Card';
-import { Caption } from '../../common-components/Tipografia/Caption';
-import { Description } from '../../common-components/Tipografia/Description';
-import { HeadingTwo } from '../../common-components/Tipografia/HeadingTwo';
-import { ButtonLink } from '../../common-components/ButtonLink/ButtonLink';
 import {
 	BorderRadiuses,
-	Colors,
-	Shadows,
-	Spaces,
-	FontSizes,
-	FontFamilies,
-	FontWeights,
 } from '../../shared/DesignTokens';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css'

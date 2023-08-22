@@ -8,7 +8,7 @@ import {
 import background from '../assets/images/background.svg' 
 import { Stars } from '../common-components/Stars/Stars';
 import { Button } from '../common-components/Button/Button';
-import { useBand, useAlbumSearch } from '../hooks/useBand';
+import { useBand} from '../hooks/useBand';
 import { useParams } from 'react-router';
 import { HeadingFour } from '../common-components/Tipografia/HeadingFour';
 import { HeadingFive } from '../common-components/Tipografia/HeadingFive';
@@ -19,7 +19,10 @@ import { useFormik } from 'formik';
 import { SelectField, Option } from '../common-components/SelectField/SelectField';
 import { Alert } from '../common-components/Alert/Alert';
 import * as yup from 'yup';
+import { NotFound } from './NotFound';
+import { error } from 'jquery';
 
+// Capa de fundo padrão da tela de detalhes
 const Background = styled.div`
     justify-content: center;
     width: 100%;
@@ -42,6 +45,8 @@ const ImageContainer = styled.div`
 	justify-content: center;
 
 `
+
+// Estilização da imagem da banda
 const Image = styled.div`
     
     position: relative;
@@ -61,7 +66,6 @@ const Image = styled.div`
 
 const FlexOne = styled.div`
     display: flex;
-
     justify-content: space-between;
     align-items: center;
 
@@ -120,12 +124,14 @@ const Padding = styled.div`
 
 export function Details() {
 
-
+// Recebe o id da banda pelo URL 
 	const { id } = useParams();
+// Hook que recebe o id da banda e retorna os dados dela, além de poder armazenar a avaliação e pegar uma avaliação já definida antes.
 	const { band, isLoading, setBandAvaliation, getBandAvaliation } = useBand(id);
+// Acionado caso o usuário clique no botão de avaliar
     const [isSubmitted, setIsSubmitted] = React.useState(false);
 
-
+// Utilização do formik para lógica de avaliação. Começa vazio caso nenhuma avaliação tenha sido feita antes e atualiza de acordo com a seleção de 1 a 5 do usuário.
     const formik = useFormik({
         initialValues: getBandAvaliation(id) || { avaliation: '' },
 		validationSchema: yup.object().shape({
@@ -147,132 +153,135 @@ export function Details() {
   };
     
 
+  var tela = <>
+  <ScrollToTop></ScrollToTop>
+  <Preloader/>
   
-    return (
-        <>
-        <ScrollToTop></ScrollToTop>
-        <Preloader/>
-        <div>
-            <Background src={background}/> 
-           
-            
-            <div className='container'>
-            {!isLoading && (
-                <ImageContainer>
-                <Image src={band.picture_big}/>
-            </ImageContainer>
-            )};
-            </div>
+  <div>
+      <Background src={background}/> 
+     
+      
+      <div className='container'>
+      {!isLoading && (
+          <ImageContainer>
+          <Image src={band.picture_big}/>
+      </ImageContainer>
+      )};
+      </div>
 
-        </div>
-        <div className='container'>
-        {!isLoading &&(
-            <>
-         <FlexOne>
-            
-            <FlexTwo >
-            <HeadingTwo>
-                {band.name}
-            </HeadingTwo>
-            </FlexTwo>
-            <FlexThree>
-                <StarBox>
-                    {getBandAvaliation(id) != null ? (
-                        <Stars number={getBandAvaliation(id).avaliation}  />
-                    ) : (
-                        <Stars number={0}  />
-                    )}
-                
-                </StarBox>
+  </div>
+  <div className='container'>
+  {!isLoading &&(
+      <>
+   <FlexOne>
+  
+      <FlexTwo >
+      <HeadingTwo>
+          {band.name}
+      </HeadingTwo>
+      </FlexTwo>
 
-                <div>
-                <form onSubmit={formik.handleSubmit} noValidate> 
-		<div>
-			<SelectField 
-                className='mb-4'
-                name="avaliation"
-                onChange={formik.handleChange}
-                value={formik.values.avaliation}
-                required
-            >
-                    <Option value="" disabled> Selecione a nota</Option>
-                    <Option>5</Option>
-                    <Option>4</Option>
-                    <Option>3</Option>
-                    <Option>2</Option>
-                    <Option>1</Option>
-			</SelectField>
-			<div >
-				<Button type="submit">Avaliar</Button>
-                
-			</div>
-            
-            {formik.errors.avaliation && (
-                
-                    <Alert type="error">
-                        Escolha uma nota para ser atribuída
-                    </Alert>
-            )
-            }
+      <FlexThree>
+          {/* renderiza as estrelas se a avaliação não for nula */}
+          <StarBox>
+              {getBandAvaliation(id) != null ? (
+                  <Stars number={getBandAvaliation(id).avaliation}  />
+              ) : (
+                  <Stars number={0}  />
+              )}
+          
+          </StarBox>
 
-            
-            {isSubmitted  && (
-                
+          <div>
+          <form onSubmit={formik.handleSubmit} noValidate> 
+  <div>
+      <SelectField 
+          className='mb-4'
+          name="avaliation"
+          onChange={formik.handleChange}
+          value={formik.values.avaliation}
+          required
+      >
+              <Option value="" disabled> Selecione a nota</Option>
+              <Option>5</Option>
+              <Option>4</Option>
+              <Option>3</Option>
+              <Option>2</Option>
+              <Option>1</Option>
+      </SelectField>
+      <div >
+          <Button type="submit">Avaliar</Button>
+          
+      </div>
 
-                <Alert type="success">
-                    {console.log(formik)}
-                    Nota atribuída com sucesso!
-                </Alert>
-            )
-            }
+      {/* mensagem de erro para caso o usuário não insira um valor na hora de avaliar */}
+      {formik.errors.avaliation && (
+          
+              <Alert type="error">
+                  Escolha uma nota para ser atribuída
+              </Alert>
+      )
+      }
 
-            {formik.errors.avaliation && (
-                            
-                    <Alert type="error">
-                        {console.log(formik)}
-                        Escolha uma nota para ser atribuída
-                    </Alert>
-            )
-            }
-                        
-
-		</div>
-	</form>
-                </div>
-            </FlexThree>
-            </FlexOne>
-            
-             <FlexTwo className='mt-5'>
-            
-            <div className='pe-5 me-5'>
-                <HeadingFour>
-                    {band.nb_album} +
-                </HeadingFour>
-                <HeadingFive>Albums</HeadingFive>
-            </div>
-            <div>
-           
-                <HeadingFour>
-                    {band.nb_fan} +
-                </HeadingFour>
-                <HeadingFive>Fãs</HeadingFive>
-         
-            </div>
-        </FlexTwo>
-        </>
-        )}
-            </div>
-
-        {!isLoading && (
-            <>
-             <AlbumsList name={band.name} id={id}>
-            </AlbumsList>
-            </>
-        )}
-       
+      {/* mensagem de sucesso caso a nota seja atribuida */}
+      {isSubmitted  && (
           
 
-            
-        </>
-    )
+          <Alert type="success">
+              {console.log(formik)}
+              Nota atribuída com sucesso!
+          </Alert>
+      )
+      }
+
+      
+
+  </div>
+</form>
+          </div>
+      </FlexThree>
+      </FlexOne>
+      
+       <FlexTwo className='mt-5'>
+      
+      <div className='pe-5 me-5'>
+          <HeadingFour>
+              {band.nb_album} +
+          </HeadingFour>
+          <HeadingFive>Albums</HeadingFive>
+      </div>
+      <div>
+     
+          <HeadingFour>
+              {band.nb_fan} +
+          </HeadingFour>
+          <HeadingFive>Fãs</HeadingFive>
+   
+      </div>
+  </FlexTwo>
+  </>
+  )}
+      </div>
+
+  {!isLoading && (
+      <>
+       <AlbumsList name={band.name} id={id}>
+      </AlbumsList>
+      </>
+  )}
+      
+  </>
+
+console.log(band)
+
+if (!isLoading && band.error) {
+ tela = <>
+ <Preloader/>
+ <NotFound></NotFound>
+ </>
+}
+  
+    return (
+        tela
+        )
 }

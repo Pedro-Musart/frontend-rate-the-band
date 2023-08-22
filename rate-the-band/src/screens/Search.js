@@ -12,7 +12,9 @@ import searchIcon from '../assets/icons/search.svg';
 import { useBandSearch } from '../hooks/useBandSearch';
 import { Preloader } from '../common/Preloader/Preloader';
 import DefaultBands from '../common-components/Data/DefaultBands';
+import { Description } from '../common-components/Tipografia/Description';
 
+// Estilização para a grade de cards das bandas
 const BandGrid = styled(Box)`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -32,6 +34,7 @@ const BandGrid = styled(Box)`
   }
 `;
 
+// Ícone de busca
 const Icon = styled.img.attrs({
   src: searchIcon,
 })`
@@ -39,14 +42,17 @@ const Icon = styled.img.attrs({
   height: 23px;
 `;
 
+// Estilização para adicionar margem inferior
 const MarginBottom = styled.div`
   margin-bottom: 120px;
 `;
 
+// Estilização para adicionar margem vertical
 const MarginY = styled.div`
   margin: 60px 0px 60px 0px;
 `;
 
+// Estilização para o wrapper que contém o campo de busca e o botão
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -59,69 +65,59 @@ const Wrapper = styled.div`
 `;
 
 export function Search() {
+  // Armazena o valor digitado pelo usuário no campo de busca e se o botão de busca foi pressionado
+  const [search, setSearch] = React.useState({
+    value: "",
+    doSearch: false,
+  });
 
-	function handleUpdateSearchValue({
-		target: {
-			value
-		}
-	}) {
-		setSearch((prevValue) => ({
-			...prevValue,
-			value
-		}));
-	}
+  // Atualiza o valor de busca conforme o usuário digita
+  function handleUpdateSearchValue({ target: { value } }) {
+    setSearch((prevValue) => ({
+      ...prevValue,
+      value
+    }));
+  }
 
-	function handleSearch() {
-		setSearch((prevValue) => ({
-			...prevValue,
-			doSearch: true
-		})
-    );
-	}
+  // Ativa a busca quando o botão é clicado
+  function handleSearch() {
+    setSearch((prevValue) => ({
+      ...prevValue,
+      doSearch: true
+    }));
+  }
 
-	const [bandName, setBandName] = React.useState('');
-	const [search, setSearch] = React.useState({
-		value: "",
-		doSearch: false,
-	});
+  // Armazena o nome da banda digitado pelo usuário
+  const [bandName, setBandName] = React.useState('');
 
-
-  
-	React.useEffect(() => {
-		if (search.doSearch) {
-			setBandName(search.value);
-      
-			setSearch((prevValue) => ({
-				...prevValue,
-				doSearch: false
-			})
-      );
-    
+  // Atualiza o nome da banda com o valor da busca quando o botão de busca é pressionado
+  React.useEffect(() => {
+    if (search.doSearch) {
+      setBandName(search.value);
+      setSearch((prevValue) => ({
+        ...prevValue,
+        doSearch: false
+      }));
     }
-	}, [search]);
+  }, [search]);
 
+  // Utiliza o hook de busca de banda, passando o nome da banda e obtém os dados da requisição e um indicador booleano de carregamento
+  const { bands, isLoading } = useBandSearch(bandName);
 
-	const {
-		bands,
-		isLoading
-	} = useBandSearch(bandName);
-
-console.log(bands)
   return (
     <>
-    <Preloader />
+      <Preloader />
       <main className="container-xl">
         <MarginBottom>
-          <InfoApresentation></InfoApresentation>
+          <InfoApresentation />
         </MarginBottom>
 
-        <HeadingThree className='mb-4'>Campo de Busca</HeadingThree>
+        <HeadingThree className='mb-4'>Pesquisar Bandas</HeadingThree>
         <Wrapper>
           <SearchField
-            placeholder="Digite uma banda"
+            placeholder="Digite o nome da banda"
             onKeyUp={handleUpdateSearchValue}
-          ></SearchField>
-
+          />
           <div>
             <Button onClick={handleSearch}>
               <Icon className="me-4" />
@@ -132,56 +128,50 @@ console.log(bands)
 
         <MarginY>
           <BandGrid>
-            {isLoading && (
-              <>
-                <BandCardLoader />
-                <BandCardLoader />
-                <BandCardLoader />
-                <BandCardLoader />
-                <BandCardLoader />
-                <BandCardLoader />
-                <BandCardLoader />
-                <BandCardLoader />
-                <BandCardLoader />
-                <BandCardLoader />
-                <BandCardLoader />
-                <BandCardLoader />
-                <BandCardLoader />
-                <BandCardLoader />
-                <BandCardLoader />
-                <BandCardLoader />
-                <BandCardLoader />
-                <BandCardLoader />
-                <BandCardLoader />
-              </>
-            )}
+            {/* Renderiza o loader dos cards enquanto os dados estão carregando */}
+            {isLoading && Array.from({ length: 20 }).map((_, index) => (
+              <BandCardLoader key={index} />
+            ))}
 
+            {/* Renderiza as bandas padrões se nenhum nome de banda foi inserido */}
             {!bandName && DefaultBands.map((band) => (
               <BandCard
+                key={band.artist.id}
                 id={band.artist.id}
                 name={band.artist.name}
-                bandImage={band['artist']['picture_medium']}
+                bandImage={band.artist.picture_medium}
                 albumImage1={band.albuns[0]?.cover_big}
                 albumImage2={band.albuns[1]?.cover_big}
+                albumImage3={band.albuns[2]?.cover_big}
                 verMais={band.musics.length}
               />
             ))}
 
+            {/* Renderiza as bandas obtidas da busca */}
             {!isLoading && bands.map((band) => (
               <BandCard
+                key={band.artist.id}
                 id={band.artist.id}
                 name={band.artist.name}
-                bandImage={band['artist']['picture_medium']}
+                bandImage={band.artist.picture_medium}
                 albumImage1={band.albuns[0]?.cover_big}
                 albumImage2={band.albuns[1]?.cover_big}
+                albumImage3={band.albuns[2]?.cover_big}
                 verMais={band.musics.length}
               />
             ))}
           </BandGrid>
-        </MarginY>
 
-        
+          {/* Mensagem de "nenhum resultado encontrado" quando a busca não retorna resultados */}
+          {!isLoading && bandName && bands.length === 0 && (
+            <div className='d-flex flex-column align-items-center'>
+              <HeadingThree>Nenhum Resultado Encontrado!</HeadingThree>
+              <Description className='mt-2'>Verifique se o nome da banda foi inserido corretamente e tente novamente.</Description>
+            </div>
+          )}
+        </MarginY>
       </main>
     </>
   );
 }
+

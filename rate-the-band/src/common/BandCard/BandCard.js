@@ -1,17 +1,11 @@
 import styled from 'styled-components';
-import { Box } from 'reflexbox';
 import { Card } from '../../common-components/Card/Card';
-import { Caption } from '../../common-components/Tipografia/Caption';
-import { Description } from '../../common-components/Tipografia/Description';
-import { HeadingTwo } from '../../common-components/Tipografia/HeadingTwo';
 import { ButtonLink } from '../../common-components/ButtonLink/ButtonLink';
 import { Stars } from '../../common-components/Stars/Stars';
 import { useBand } from '../../hooks/useBand';
 import {
 	BorderRadiuses,
 	Colors,
-	Shadows,
-	Spaces,
 	FontSizes,
 	FontFamilies,
 	FontWeights,
@@ -31,14 +25,17 @@ const BandImage = styled.div`
 	width: 207px;
 	height: 207px;
 	display:flex;
-	align-items: end;
-	justify-content: left;
+	align-items: flex-end;
+	justify-content: start;
 	border-radius: ${BorderRadiuses.ONE};
 	background-image: url('${(props) => props.src}');
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
-
+	transition: 200ms all ease;
+	&:hover {
+		transform: scale(1.1) translate(0, -6%) ;	
+	}
 	@media (max-width: 700px) {
 	width: 158px;
 	height: 158px;
@@ -61,20 +58,21 @@ const BandName = styled.h5`
 	color: ${Colors.NEUTRAL_WHITE};
 	margin: 0;
 	padding: 0;
-
 	@media (max-width: 700px) {
 	font-weight: ${FontWeights.REGULAR};
 `
 
 const AlbumContainer = styled.div`
 	display: flex;
+	justify-content:space-evenly;
 	width: 100%;
 	margin-top: 10px;
 `
 
 const AlbunsImages = styled.div`
-	flex: 1 ;
-	margin-right: 10px;
+	width: 100%;	
+	min-width: 63px;
+	height: 63px;
 	border-radius: 1.2rem;
 	background-image: url('${(props) => props.src}');
 	background-repeat: no-repeat;
@@ -82,43 +80,9 @@ const AlbunsImages = styled.div`
 	background-position: center;
 	`
 
-const MoreInfo = styled.div`
-	flex: 1 ;
-	width: 63px;
-	height: 63px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	@media (max-width: 700px) {
-	width:  46px;
-	height: 46px;
-`
-
-const Button = styled.button`
-	
-	border: none;
-	outline: none;
-	width:100%;
-	height: 100%;
-	font-family: ${FontFamilies.PRIMARY};
-	font-weight: ${FontWeights.BOLD};
-	background-color: ${Colors.NEUTRAL_PURPLE};
-	color: ${Colors.NEUTRAL_WHITE};
-	box-shadow: ${Shadows.ONE};
-	border-radius: 1.2rem;
-	cursor: pointer;
-	transition: 200ms all ease;	
-	font-size: ${FontSizes.BASE};
-	display: flex;
-	justify-content: center;
- 	align-items: center;
-	&:hover {
-		background-color: ${Colors.NEUTRAL_PURPLE1};
-	}
-`
 
 
-export function BandCard({ name, bandImage, albumImage1, albumImage2,verMais, id }) {
+export function BandCard({ name, bandImage, albumImage1, albumImage2,albumImage3, id }) {
 	const { band, isLoading, getBandAvaliation } = useBand(id);
 
 	return (
@@ -127,7 +91,8 @@ export function BandCard({ name, bandImage, albumImage1, albumImage2,verMais, id
 		<Section>
 		<div>
 		<Card>
-			<BandImage  src={bandImage}>
+						<ButtonLink to={`/details/${id}`}>
+						<BandImage  src={bandImage}>
 				<BandInfo>
 
 				<BandName>{name}</BandName>
@@ -141,6 +106,9 @@ export function BandCard({ name, bandImage, albumImage1, albumImage2,verMais, id
 				</div>
 				</BandInfo>
 			</BandImage>
+			</ButtonLink>
+
+
 		</Card>
 		</div>
 		<AlbumContainer>
@@ -150,18 +118,15 @@ export function BandCard({ name, bandImage, albumImage1, albumImage2,verMais, id
 
 			{albumImage2 && (
 			<>
-			<AlbunsImages src={albumImage2}></AlbunsImages>	
+			<AlbunsImages className="ms-2" src={albumImage2}></AlbunsImages>	
 			</>
 			)}
-			
-			<MoreInfo >
-			
-			<Button>
-			<ButtonLink to={`/details/${id}`}>
-			{verMais}+
-			</ButtonLink>
-			</Button>
-			</MoreInfo>
+
+			{albumImage3 && (
+			<>
+			<AlbunsImages className="ms-2" src={albumImage3}></AlbunsImages>	
+			</>
+			)}
 		</AlbumContainer>
 		</Section>
 		</div>
