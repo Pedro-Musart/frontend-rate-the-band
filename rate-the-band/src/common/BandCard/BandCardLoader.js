@@ -48,17 +48,26 @@ const BandInfo= styled.div`
 
 const AlbumContainer = styled.div`
 	display: flex;
+	justify-content:space-evenly;
 	width: 100%;
-	height: 63px;
 	margin-top: 10px;
 `
 
 const AlbunsImages = styled.div`
-	flex: 1 ;
-	
+
+	width: 100%;	
+	min-width: 63px;
+	min-height: 63px;
 	margin-right: 10px;
 	border-radius: 1.2rem;
+	border: 2px solid #3b3b3b ;
+
+	@media (max-width: 700px) {
+		min-width: 50px;
+		min-height: 50px;
+
 	`
+	
 
 
 export function BandCardLoader({ name, bandImage, albumImage1, albumImage2,verMais, id }) {
@@ -79,15 +88,15 @@ export function BandCardLoader({ name, bandImage, albumImage1, albumImage2,verMa
 		</div>
 		<AlbumContainer>
 			<AlbunsImages  >
-				<Skeleton/>
+				
 			</AlbunsImages>
 
 			<AlbunsImages  >
-				<Skeleton/>
+				
 			</AlbunsImages>
 	
 			<AlbunsImages className='m-0'  >
-				<Skeleton/>
+				
 			</AlbunsImages>
 			
 		

@@ -32,7 +32,9 @@ const Background = styled.div`
     background-position: center; 
     background-size: cover;
     @media (max-width: 900px) {
-	height: 250px;
+	height: 150px;
+    @media (max-width: 700px) {
+        height: 90px;
 `
 
 

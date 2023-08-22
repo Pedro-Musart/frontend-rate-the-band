@@ -25,7 +25,7 @@ export function AlbumsList({ id }) {
     <>
 
       {!isLoadingAlbum && album.map((album, index) => {
-        const delay = 600 * index; // Atraso em milissegundos para cada iteração
+        const delay = 700 * index; // Atraso em milissegundos para cada iteração
         return (
           <DelayedRender delay={delay} key={album.id}>
             <OEmbed id={album.id} />
