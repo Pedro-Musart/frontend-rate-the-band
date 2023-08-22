@@ -78,6 +78,10 @@ const AlbunsImages = styled.div`
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
+	@media (max-width: 700px) {
+		min-width: 50px;
+		height: 50px;
+
 	`
 
 
@@ -112,19 +116,18 @@ export function BandCard({ name, bandImage, albumImage1, albumImage2,albumImage3
 		</Card>
 		</div>
 		<AlbumContainer>
-			<AlbunsImages  src={albumImage1}>
-				
-			</AlbunsImages>
+
+			<AlbunsImages  src={albumImage1}/>
 
 			{albumImage2 && (
 			<>
-			<AlbunsImages className="ms-2" src={albumImage2}></AlbunsImages>	
+			<AlbunsImages className="ms-2" src={albumImage2}/>	
 			</>
 			)}
 
 			{albumImage3 && (
 			<>
-			<AlbunsImages className="ms-2" src={albumImage3}></AlbunsImages>	
+			<AlbunsImages className="ms-2" src={albumImage3}/>	
 			</>
 			)}
 		</AlbumContainer>
