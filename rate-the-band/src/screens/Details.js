@@ -153,6 +153,8 @@ export function Details() {
   };
     
 
+  
+// Essa var armazena a tela que é carregada caso a requisição retorne algum valor válido, essa var é o retorno da função Details.
   var tela = <>
   <ScrollToTop></ScrollToTop>
   <Preloader/>
@@ -233,10 +235,8 @@ export function Details() {
           </Alert>
       )
       }
-
-      
-
   </div>
+
 </form>
           </div>
       </FlexThree>
@@ -272,15 +272,15 @@ export function Details() {
       
   </>
 
-console.log(band)
 
+// Troca o valor da tela para um erro, caso a requisição retorne um objeto inválido
 if (!isLoading && band.error) {
- tela = <>
- <Preloader/>
- <NotFound></NotFound>
- </>
-}
-  
+    tela = <>
+    <Preloader/>
+    <NotFound></NotFound>
+    </>
+   }
+
     return (
         tela
         )
