@@ -14,13 +14,14 @@ import { HeadingFour } from '../common-components/Tipografia/HeadingFour';
 import { HeadingFive } from '../common-components/Tipografia/HeadingFive';
 import { AlbumsList } from '../common/AlbumsList/AlbumsList';
 import { Preloader } from '../common/Preloader/Preloader';
-import ScrollToTop from '../common/ScrollToTop/ScrollToTop';
+import ScrollToTop from '../common-components/Functions/ScrollToTop/ScrollToTop';
 import { useFormik } from 'formik';
 import { SelectField, Option } from '../common-components/SelectField/SelectField';
 import { Alert } from '../common-components/Alert/Alert';
 import * as yup from 'yup';
 import { NotFound } from './NotFound';
 import { error } from 'jquery';
+
 
 // Capa de fundo padrão da tela de detalhes
 const Background = styled.div`
@@ -122,6 +123,8 @@ const StarBox = styled.div`
 const Padding = styled.div`
     padding: 0px 5vw 0px 5vw;
 `
+
+
 
 
 export function Details() {
@@ -269,6 +272,7 @@ export function Details() {
       <>
        <AlbumsList name={band.name} id={id}>
       </AlbumsList>
+    
       </>
   )}
       

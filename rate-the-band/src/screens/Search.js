@@ -106,6 +106,7 @@ export function Search() {
 
   return (
     <>
+    
       <Preloader />
       <main className="container-xl">
         <MarginBottom>

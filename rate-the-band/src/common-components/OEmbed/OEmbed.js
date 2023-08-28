@@ -1,6 +1,9 @@
 import styled, {keyframes} from "styled-components";
 
+// essa função recebe como parâmetro o id da banda/artista e devolve a renderização do OEmbed do Deezer
+
 export function OEmbed({id}){
+
 
 const AppearFromLeft = keyframes`
   0% {
@@ -23,7 +26,7 @@ const AppearFromLeft = keyframes`
 
 const Animation = styled.div`
   margin-top: 20px;
-  animation: ${AppearFromLeft} 4s ease-in-out;
+  animation: ${AppearFromLeft} 1s ease-in-out;
 `;
 
 

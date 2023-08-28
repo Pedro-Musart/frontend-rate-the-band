@@ -7,6 +7,7 @@ import { Button } from "../../common-components/Button/Button";
 import { Link } from "../../common-components/Link/Link";
 import React from 'react';
 import { useWindowDimensions } from '../../hooks/useWindowDimensions';
+import ScrollToSearch from '../Functions/ScrollToSearch/ScrollToSearch';
 
 const fadeInAnimation = keyframes`
   from {
@@ -75,7 +76,32 @@ const Background = styled.div`
   
    const { isTab, isMobile } = useWindowDimensions();
    const [menuClick, setMenuClick] = React.useState(false);
+   const [searchClick, setSearchClick] = React.useState(false);
 
+ 
+//  rola a página para o campo de busca
+   React.useEffect(() => {
+      if (searchClick) {
+         const currentURL = window.location.href;
+         var searchY = 750
+         if (isMobile){
+            searchY = 1050
+         }
+         if(currentURL.includes("details")) {
+
+
+            window.location.href = "/"
+            
+        
+        
+        } else{
+                window.scrollTo(0, searchY);
+                setSearchClick(false)
+        
+        }
+        
+      }
+    }, [searchClick]);
 
    function navBarStates(isMobile, menuClick){
 
@@ -95,9 +121,8 @@ const Background = styled.div`
             <Link className="me-4" >Home</Link>
             </a>
             <a >
-            <Link className="me-4" >Procurar</Link>
+            <Link className="me-4"  onClick={() => setSearchClick(true)} >Procurar</Link>
             </a>
-
             
          
             <form  method = 'get'
@@ -140,7 +165,9 @@ const Background = styled.div`
             <a href='/'>
             <Link className="me-4" >Home</Link>
             </a>
-            <Link className="me-4">Procurar</Link>
+            <a >
+            <Link className="me-4"  onClick={() => setSearchClick(true)} >Procurar</Link>
+            </a>
             <form  method = 'get'
                 action = 'https://github.com/Pedro-Musart/rate-the-band'>
                 <Button >
@@ -163,6 +190,7 @@ const Background = styled.div`
 
     return (
       <>
+
 
      {navBarStates(isTab, menuClick)}
       
