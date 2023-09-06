@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import $ from 'jquery';
-import useAxios from 'axios-hooks';
+
 
 export function useBand(bandId) {
+
   const [isLoading, setIsLoading] = useState(true);
   const [band, setBand] = useState(null);
 
@@ -63,6 +64,7 @@ export function useBand(bandId) {
 }
 
 export function useAlbumSearch(bandId) {
+
   const [album, setAlbum] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 

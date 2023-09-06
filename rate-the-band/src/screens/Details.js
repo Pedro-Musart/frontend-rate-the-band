@@ -235,7 +235,7 @@ export function Details() {
           
 
           <Alert type="success">
-              {console.log(formik)}
+
               Nota atribuída com sucesso!
           </Alert>
       )

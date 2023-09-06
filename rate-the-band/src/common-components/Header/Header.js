@@ -7,7 +7,7 @@ import { Button } from "../../common-components/Button/Button";
 import { Link } from "../../common-components/Link/Link";
 import React from 'react';
 import { useWindowDimensions } from '../../hooks/useWindowDimensions';
-import ScrollToSearch from '../Functions/ScrollToSearch/ScrollToSearch';
+
 
 const fadeInAnimation = keyframes`
   from {
@@ -35,10 +35,6 @@ animation: ${fadeInAnimation} 1000ms;
 width: 100%;
 `
 
-const Background = styled.div`
- background-color: ${Colors.NEUTRAL_BLACK};
-
-`
 
  const Logo = styled.img.attrs({
     src: rateTheBandLogo,
@@ -66,9 +62,6 @@ const Background = styled.div`
  height: 25px;
 
  `;
-
-
-
 
  
  export function Header (){

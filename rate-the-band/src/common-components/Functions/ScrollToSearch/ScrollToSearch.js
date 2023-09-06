@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 function ScrollToSearch() {
     const currentURL = window.location.href;
-    console.log(currentURL);
+
 
 if(currentURL.includes("details")) {
 

@@ -67,9 +67,12 @@ const Logo = styled.img.attrs({
     
  `
 
+
 export function Footer() {
     return(
         <>
+   
+
         <Background className='w-100 navbar-fixed-bottom '>
             
             <footer className='container d-flex flex-column col-lg-6 col-sm-6 '>
