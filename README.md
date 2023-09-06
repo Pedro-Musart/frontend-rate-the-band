@@ -4,10 +4,10 @@ O projeto é um website que permite explorar uma ampla variedade de artistas usa
 
 #### Como executar o projeto?
 
-1 - Certifique-se de ter o NodeJs instalado no computador.
-2 - terminal: cd rate-the-band
-3 - terminal: npm install
-4 - terminal: npm start
+- Certifique-se de ter o NodeJs instalado no computador.
+- terminal: cd rate-the-band
+- terminal: npm install
+- terminal: npm start
 
 ## Arquitetura do projeto
 
