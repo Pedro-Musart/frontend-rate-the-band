@@ -20,7 +20,7 @@ O projeto é um website que permite explorar uma ampla variedade de artistas usa
 - **Navegação entre Páginas:** As transições entre diferentes páginas são efetuadas com o auxílio do react-router, proporcionando uma navegação fluida e amigável.
 - **Single Page Application (SPA):** O projeto segue o padrão de SPA, que permite a navegação entre as páginas sem a necessidade de recarregar a página, resultando em uma experiência de usuário mais ágil e interativa.
 
-Arquitetura do Projeto
+
 
 
 
