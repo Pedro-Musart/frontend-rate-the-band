@@ -1,6 +1,6 @@
 # Rate The Band
 
-O projeto é um website que permite explorar uma ampla variedade de artistas usando a API do Deezer por meio de um campo de pesquisa. Em cada página dedicada a um artista, os usuários podem avaliar os artistas em uma escala de 0 a 5, com as avaliações sendo armazenadas localmente. Além disso, os visitantes têm a oportunidade de ouvir trechos de álbuns de seus artistas favoritos.
+Rate the Band é um website que permite explorar uma ampla variedade de artistas usando a API do Deezer por meio de um campo de pesquisa. Em cada página dedicada a um artista, os usuários podem avaliar os artistas em uma escala de 0 a 5, com as avaliações sendo armazenadas localmente. Além disso, os visitantes têm a oportunidade de ouvir trechos de álbuns de seus artistas favoritos.
 
 #### Como executar o projeto?
 
