@@ -16,7 +16,7 @@ Rate the Band é um website que permite explorar uma ampla variedade de artistas
 - **Framework:** O projeto é baseado no framework React.js, utilizando a biblioteca create-react-app como ponto de partida.
 - **Persistência de Dados:** Para a persistência de dados no navegador do usuário, faz uso da funcionalidade de Local Storage.
 - **Requisições HTTP:** As requisições HTTP são gerenciadas através da biblioteca axios e ajax, proporcionando uma comunicação eficaz com o servidor.
-- **Indicadores de Carregamento:** Para aprimorar a experiência do usuário, o projeto utiliza a biblioteca react-skeletons para exibir indicadores de carregamento durante o processamento de dados.
+- **Indicadores de Carregamento:** Para aprimorar a experiência do usuário, o projeto utiliza a biblioteca react-loader-spinner para exibir indicadores de carregamento durante o processamento de dados.
 - **Estilização CSS:** A estilização do projeto é implementada com o auxílio do poderoso Styled Components, permitindo uma estilização altamente flexível e modular.
 - **Gerenciamento de Formulários:** O projeto incorpora o formik para facilitar o gerenciamento de formulários, simplificando a validação e manipulação de entradas de dados.
 - **Navegação entre Páginas:** As transições entre diferentes páginas são efetuadas com o auxílio do react-router, proporcionando uma navegação fluida e amigável.
